@@ -6,7 +6,7 @@
 #    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/10/17 21:48:31 by junsan           ###   ########.fr        #
+#    Updated: 2024/10/18 11:53:12 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ MLX		= $(addprefix $(MLX_BUILD_DIR), libmlx42.a)
 CFLAGS 	= -Wall -Wextra -Werror -g3
 IFLAGS	= -I ./includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 
+LINK_FLAG = 
 GLFW_LIB = -lglfw
 
 SRC		= main.c
@@ -37,11 +38,10 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 ifeq ($(OS), Linux)
-	MLX_LNK	= -L$(MLX_DIR) -lmlx  -lXext -lX11 -lm -lz
-	LINK_FLAG = -ldl $(GLFW_LIB) -pthread -lm
+	MLX_LNK = -ldl $(GLFW_LIB) -pthread -lm
 else ifeq ($(OS), Darwin)
 	MLX_LNK	= -framework Cocoa -framework OpenGL -framework IOKit
-	LINK_FLAG = $(GLFW_LIB)
+	LINK_FLAG += $(GLFW_LIB)
 endif
 
 vpath %.c ./src/
