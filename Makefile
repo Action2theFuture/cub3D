@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
+#    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/10/18 11:53:12 by junsan           ###   ########.fr        #
+#    Updated: 2024/10/26 22:21:58 by max              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,13 @@ IFLAGS	= -I ./includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
 LINK_FLAG = 
 GLFW_LIB = -lglfw
 
-SRC		= main.c
+SRC		= main.c 	\
+		  clean.c \
+		  check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
+		  get_map.c \
+		  print_test.c \
+		  store_elements.c \
+		  check_elements_and_map_name.c
 
 SRC_DIR		= ./src/
 
