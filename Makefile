@@ -6,29 +6,23 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/10/26 22:21:58 by max              ###   ########.fr        #
+#    Updated: 2024/10/30 20:09:43 by max              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= cub3D
-OS		= $(shell uname)
-
-BREW_PREFIX = $(shell brew --prefix)
 
 OBJ_DIR		= ./obj/
 LIB_DIR		= ./lib
 LIBFT_DIR 	= $(LIB_DIR)/libft/
-MLX_DIR		= $(LIB_DIR)/MLX42
-MLX_BUILD_DIR = $(MLX_DIR)/build/
+MLX_DIR		= $(LIB_DIR)/minilibx-linux/
+
 
 LIBFT   = $(addprefix $(LIBFT_DIR), libft.a)
-MLX		= $(addprefix $(MLX_BUILD_DIR), libmlx42.a)
+MLX		= $(addprefix $(MLX_DIR), libmlx.a)
 
 CFLAGS 	= -Wall -Wextra -Werror -g3
 IFLAGS	= -I ./includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
-
-LINK_FLAG = 
-GLFW_LIB = -lglfw
 
 SRC		= main.c 	\
 		  clean.c \
@@ -43,17 +37,10 @@ SRC_DIR		= ./src/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-ifeq ($(OS), Linux)
-	MLX_LNK = -ldl $(GLFW_LIB) -pthread -lm
-else ifeq ($(OS), Darwin)
-	MLX_LNK	= -framework Cocoa -framework OpenGL -framework IOKit
-	LINK_FLAG += $(GLFW_LIB)
-endif
-
 vpath %.c ./src/
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	cc $(CFLAGS) $(MLX_LNK) $(MLX) -o $@ $(OBJS) $(LIBFT) $(LINK_FLAG)
+	cc $(CFLAGS) $(MLX) -o $@ $(OBJS) $(LIBFT)
 
 $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
@@ -63,9 +50,8 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(MLX):
-	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4 \
+	@make -C $(MLX_DIR) 
 		--no-print-directory
-
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -75,7 +61,6 @@ all : $(NAME)
 clean :
 	@make -C $(LIBFT_DIR) clean
 	rm -rf $(OBJ_DIR)
-	@rm -rf $(MLX_BUILD_DIR)
 
 fclean : clean
 	@make -C $(LIBFT_DIR) fclean
