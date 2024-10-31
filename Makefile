@@ -6,7 +6,7 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/10/30 21:59:29 by max              ###   ########.fr        #
+#    Updated: 2024/10/31 01:30:42 by max              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ PARSING  = parsing/check_walls.c parsing/parse_map.c parsing/parse_utils.c parsi
 		   parsing/store_elements.c \
 		   parsing/check_elements_and_map_name.c
 		   
-INIT     = init/mlx/init_mlx.c
+INIT     = init/mlx/init_mlx.c \
+		   init/data/init_data.c
 		   
 CLEANING = clean-destroy/clean.c \
 		   clean-destroy/destroy.c
