@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 01:40:20 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 16:23:13 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static char **get_elements(int fd, t_description_file *desc_file)
         if (!elements[i])
         {
             if (count < 6)
-                clean_partial_array(elements, i);
-            return NULL;
+                return (clean_partial_array(elements, i), NULL);
         }
-        if ((j = skype_space(elements[i])) && elements[i][j] == '\n')
+        j = skype_space(elements[i]);
+        if (elements[i][j] == '\n')
         {
             free(elements[i]);
             continue;
@@ -46,6 +46,7 @@ static bool check_and_store_elements(t_description_file *desc_file, char **eleme
         return false;
     if (!store_elements(desc_file, elements))
         return false;
+    format_elements(desc_file);
     if (malloc_failed(desc_file))
         return (printf("Error\nMalloc failled\n"), false);
     if (!validate_color_size(desc_file))
@@ -86,6 +87,8 @@ static bool validate_map(t_description_file *desc_file)
 
 bool parse(t_description_file *desc_file, char **argv)
 {
+    char *str;
+
     if (!check_map_name(argv[1]))
         return false;
     desc_file->fd = open(argv[1], O_RDONLY);
@@ -93,13 +96,17 @@ bool parse(t_description_file *desc_file, char **argv)
         return (printf("Error\nOpen file failed\n"), false);
     char **elements = get_elements(desc_file->fd, desc_file);
     if (!elements)
-        return (printf("Error\nInvalid description file format\n"), false);
+        return (printf("Error\nInvalid description file format\n"), close(desc_file->fd), false);
     if (!check_and_store_elements(desc_file, elements))
-        return false;
+    {
+        while ((str = get_next_line(desc_file->fd)))
+            free(str);
+        return (clean_elements_array(elements), close(desc_file->fd), clean_all(desc_file), false);
+    }
     if (!get_map(desc_file, argv))
-        return (clean_elements_array(elements), false);
+        return (clean_elements_array(elements), close(desc_file->fd), false);
     if (!validate_map(desc_file))
-        return (clean_all(desc_file), clean_elements_array(elements), false);
+        return (clean_all(desc_file), clean_elements_array(elements), close(desc_file->fd), false);
     clean_elements_array(elements);
     return true;
 }

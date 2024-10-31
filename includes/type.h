@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/10/30 23:56:31 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 01:50:46 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,18 @@ typedef struct s_mlx
 
 } t_mlx;
 
+// typedef struct s_player
+// {
+
+// } t_player;
+
 typedef struct s_data
 {
     t_description_file *df;
     t_mlx mlx;
     int screen_size_x;
     int screen_size_y;
+    // int initial_view_direction;
 } t_data;
 
 #endif

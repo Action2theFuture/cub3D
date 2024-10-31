@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 01:29:57 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 15:06:23 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static bool load_texture(t_data *data, t_description_file *df)
     int x;
     int y;
 
-    x = 1024;
-    y = 1024;
+    x = 128;
+    y = 128;
 
     data->mlx.north_texture = mlx_xpm_file_to_image(data->mlx.ptr, df->elements.north_path, &x, &y);
     if (data->mlx.north_texture == NULL)
@@ -61,6 +61,6 @@ bool init_mlx_and_data(t_data *data, t_description_file *df)
 {
     if (!init_mlx(data, df))
         return false;
-    
+
     return true;
 }

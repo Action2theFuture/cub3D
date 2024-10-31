@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:17:19 by max               #+#    #+#             */
-/*   Updated: 2024/10/26 14:36:00 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 15:29:34 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void print_map(t_description_file *desc_file)
 }
 void print_desc_file(t_description_file *desc_file)
 {
-    printf("%s", desc_file->elements.north_path);
-    printf("%s", desc_file->elements.south_path);
-    printf("%s", desc_file->elements.east_path);
-    printf("%s", desc_file->elements.west_path);
+    printf("%s\n", desc_file->elements.north_path);
+    printf("%s\n", desc_file->elements.south_path);
+    printf("%s\n", desc_file->elements.east_path);
+    printf("%s\n", desc_file->elements.west_path);
     printf("%d\n", desc_file->elements.floor.red);
     printf("%d\n", desc_file->elements.floor.green);
     printf("%d\n", desc_file->elements.floor.blue);

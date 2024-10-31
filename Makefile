@@ -6,7 +6,7 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/10/31 01:30:42 by max              ###   ########.fr        #
+#    Updated: 2024/10/31 14:28:19 by max              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ PARSING  = parsing/check_walls.c parsing/parse_map.c parsing/parse_utils.c parsi
 		   parsing/get_map.c \
 		   parsing/print_test.c \
 		   parsing/store_elements.c \
-		   parsing/check_elements_and_map_name.c
+		   parsing/check_elements_and_map_name.c \
+		   parsing/format_elements.c
 		   
 INIT     = init/mlx/init_mlx.c \
 		   init/data/init_data.c
