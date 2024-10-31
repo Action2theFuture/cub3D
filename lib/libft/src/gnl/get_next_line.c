@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:27:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/05/12 18:36:18 by junsan           ###   ########.fr       */
+/*   Updated: 2024/10/30 22:56:46 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "get_next_line.h"
+#include <stdio.h>
 
-static char	*process_backup(char **backup)
+static char *process_backup(char **backup)
 {
-	char	*new_line_ptr;
-	char	*line;
-	char	*tmp;
+	char *new_line_ptr;
+	char *line;
+	char *tmp;
 
 	new_line_ptr = gnl_strchr(*backup, ft_strlen(*backup));
 	if (!new_line_ptr)
@@ -33,14 +34,19 @@ static char	*process_backup(char **backup)
 		tmp = ft_strdup(new_line_ptr + 1);
 		free(*backup);
 		*backup = NULL;
+		if (tmp[0] == '\0')
+		{
+			free(tmp);
+			tmp = NULL;
+		}
 		*backup = tmp;
 	}
 	return (line);
 }
 
-static ssize_t	gnl_read(int fd, char *buf, char **obj_free)
+static ssize_t gnl_read(int fd, char *buf, char **obj_free)
 {
-	ssize_t	rd;
+	ssize_t rd;
 
 	if (!buf)
 		return (0);
@@ -65,10 +71,10 @@ static ssize_t	gnl_read(int fd, char *buf, char **obj_free)
 	return (rd);
 }
 
-static char	*strslice(char *line, char **backup, char *buf, size_t len)
+static char *strslice(char *line, char **backup, char *buf, size_t len)
 {
-	char	*front_line;
-	char	*ptr;
+	char *front_line;
+	char *ptr;
 
 	ptr = gnl_strchr(line, len);
 	if (!ptr)
@@ -83,10 +89,10 @@ static char	*strslice(char *line, char **backup, char *buf, size_t len)
 	return (front_line);
 }
 
-static char	*process_line(ssize_t rd, int fd, char *buf, char **backup)
+static char *process_line(ssize_t rd, int fd, char *buf, char **backup)
 {
-	char	*line;
-	size_t	len;
+	char *line;
+	size_t len;
 
 	line = NULL;
 	while (1)
@@ -107,17 +113,17 @@ static char	*process_line(ssize_t rd, int fd, char *buf, char **backup)
 		if (rd == -1)
 			return (NULL);
 		if (!rd)
-			break ;
+			break;
 	}
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	*backup[FD_MAX];
-	char		*line;
-	char		*buf;
-	ssize_t		rd;
+	static char *backup[FD_MAX];
+	char *line;
+	char *buf;
+	ssize_t rd;
 
 	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0)
 		return (NULL);

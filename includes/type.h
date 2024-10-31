@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/10/26 02:25:24 by max              ###   ########.fr       */
+/*   Updated: 2024/10/30 23:56:31 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,24 @@ typedef struct s_description_file
     char **map;
 
 } t_description_file;
+
+typedef struct s_mlx
+{
+    void *ptr;
+    void *windows;
+    void *north_texture;
+    void *south_texture;
+    void *east_texture;
+    void *west_texture;
+
+} t_mlx;
+
+typedef struct s_data
+{
+    t_description_file *df;
+    t_mlx mlx;
+    int screen_size_x;
+    int screen_size_y;
+} t_data;
 
 #endif
