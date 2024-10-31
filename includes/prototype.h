@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 14:27:57 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 20:44:47 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ bool malloc_failed(t_description_file *desc_file);
 bool validate_color_size(t_description_file *desc_file);
 bool get_map(t_description_file *desc_file, char **argv);
 int ft_strlen_map(char *str);
+bool is_valid_player_char(char c);
 //-------------------- init MLX/data ---------------------------------------
 bool init_mlx_and_data(t_data *data, t_description_file *df);
+void init_data (t_data *data);
 //------------------------ clean ------------------------------------------------
 void clean_elements_array(char **elements);
 void clean_partial_array(char **elements, int i);

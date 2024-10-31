@@ -6,11 +6,26 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:06:18 by max               #+#    #+#             */
-/*   Updated: 2024/10/30 22:14:43 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 21:05:38 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static bool new_line_in_map (t_description_file *desc_file)
+{
+    int i;
+    int j;
+    
+    i = 0;
+    while (i < desc_file->map_height)
+    {   j = skype_space(desc_file->map[i]);
+        if (desc_file->map[i][j] == '\n')
+            return true;
+        i++;
+    }
+    return false;
+}
 
 static void get_map_size(t_description_file *desc_file)
 {
@@ -22,8 +37,6 @@ static void get_map_size(t_description_file *desc_file)
     while ((line = get_next_line(desc_file->fd)))
     {
         i = skype_space(line);
-        if (line[i] == '\0')
-            printf("\nCOUCOU\n");
         if (line[i] == '\n' && end_of_elements == false)
             desc_file->elements_lines++;
         else
@@ -74,6 +87,8 @@ bool get_map(t_description_file *desc_file, char **argv)
     reach_map_start(desc_file);
     if (!extract_map_lines(desc_file))
         return false;
+    if (new_line_in_map(desc_file))
+        return (printf("Error\nNew line in map\n"), false);
     parse_map(desc_file);
     close(desc_file->fd);
     return true;

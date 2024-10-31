@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 16:23:13 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 21:00:04 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static bool check_and_store_elements(t_description_file *desc_file, char **eleme
         return (printf("Error\nInvalid color size\n"), false);
     return true;
 }
-static bool is_valid_player_char(char c)
+bool is_valid_player_char(char c)
 {
     return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
@@ -69,7 +69,7 @@ static bool validate_map(t_description_file *desc_file)
     {
         j = 0;
         while (j < desc_file->map_width - 1)
-        {
+        {   
             if (!is_valid_player_char(desc_file->map[i][j]) && desc_file->map[i][j] != '0' && desc_file->map[i][j] != '1')
                 return (printf("Error\nInvalid character in the map\n"), false);
             if (is_valid_player_char(desc_file->map[i][j]))

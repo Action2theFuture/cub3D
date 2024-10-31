@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/10/30 20:37:48 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 20:26:53 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #define F  5
 #define C  6
 #define OPEN_FAILED -1
+
+#define BASE_VIEW_ANGLE 0.0f
 
 #include <stdlib.h>
 #include <stdio.h>

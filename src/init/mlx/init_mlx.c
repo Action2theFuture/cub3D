@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 15:06:23 by max              ###   ########.fr       */
+/*   Updated: 2024/10/31 20:01:55 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool init_mlx_and_data(t_data *data, t_description_file *df)
 {
     if (!init_mlx(data, df))
         return false;
-
+    data->df = df;
+    init_data(data);
     return true;
 }
