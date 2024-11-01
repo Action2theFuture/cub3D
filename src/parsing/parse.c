@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 21:00:04 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:51:28 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,15 @@ bool is_valid_player_char(char c)
 }
 static bool validate_map(t_description_file *desc_file)
 {
-    int i;
+    int(i) = 0;
     int j;
     bool have_player;
     have_player = false;
-
-    i = 0;
     while (i < desc_file->map_height)
     {
         j = 0;
         while (j < desc_file->map_width - 1)
-        {   
+        {
             if (!is_valid_player_char(desc_file->map[i][j]) && desc_file->map[i][j] != '0' && desc_file->map[i][j] != '1')
                 return (printf("Error\nInvalid character in the map\n"), false);
             if (is_valid_player_char(desc_file->map[i][j]))
@@ -82,6 +80,8 @@ static bool validate_map(t_description_file *desc_file)
         }
         i++;
     }
+    if (have_player == false)
+        return (printf("Error\nNo player in the map\n"), false);
     return true;
 }
 

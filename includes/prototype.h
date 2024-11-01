@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:44:47 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 02:58:40 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ void clean_all(t_description_file *desc_file);
 //-----------------------destroy -----------------------------------------------
 void destroy_mlx_ptr(t_data *data);
 void clean_and_destroy_all(t_data *data, t_description_file *df);
+
+
+double degrees_to_radians(double degrees);
 
 #endif

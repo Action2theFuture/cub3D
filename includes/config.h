@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:26:53 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:13:55 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@
 #define C  6
 #define OPEN_FAILED -1
 
-#define BASE_VIEW_ANGLE 0.0f
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#define BASE_VIEW_ANGLE 0.0
+#define FOV_DEGREE 66.0
+#define FOV (FOV_DEGREE * M_PI / 180.0)
+
 
 #include <stdlib.h>
 #include <stdio.h>

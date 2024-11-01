@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:42:38 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:49:23 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,18 @@ void init_player_position(t_data *data)
     }
     return;
 }
+void init_vector(t_data *data)
+{
+    data->player.dir_x = cos(degrees_to_radians(data->player.view_angle));
+    data->player.dir_y = sin(degrees_to_radians(data->player.view_angle));
+    data->player.cam_vector_x = data->player.dir_y * tan(FOV / 2);
+    data->player.cam_vector_y = -data->player.dir_x * tan(FOV / 2);
+}
 
 void init_data(t_data *data)
 {
     init_player_position(data);
-    printf("view = %f\n", data->player.view_angle);
+    init_vector(data);
+    data->player.view_distance = (float)data->screen_size_x / (2 * tan(FOV / 2));
+ 
 }

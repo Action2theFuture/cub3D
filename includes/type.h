@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:31:30 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:34:16 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
-    float pos_x;
-    float pos_y;
-    float view_angle;
+    double pos_x;
+    double pos_y;
+    double view_angle;
+    double view_distance;
+    double dir_x;
+    double dir_y;
+    double cam_vector_x;
+    double cam_vector_y;
+    
 } t_player;
 
 typedef struct s_data
