@@ -6,12 +6,11 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 03:43:45 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 04:13:37 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-#include "../../../lib/minilibx-linux/mlx.h"
 
 static bool load_texture(t_data *data, t_description_file *df)
 {

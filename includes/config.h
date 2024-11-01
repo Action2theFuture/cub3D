@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 03:13:55 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 04:00:09 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 #define BASE_VIEW_ANGLE 0.0
 #define FOV_DEGREE 66.0
 #define FOV (FOV_DEGREE * M_PI / 180.0)
+#define WALL_HEIGHT 1.0
+#define PLAYER_VIEW_HEIGHT 0.5
+
 
 
 #include <stdlib.h>
