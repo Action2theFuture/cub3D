@@ -6,13 +6,13 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:50:43 by max               #+#    #+#             */
-/*   Updated: 2024/10/30 22:09:49 by max              ###   ########.fr       */
+/*   Updated: 2024/11/04 16:05:18 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void clean_elements_array(char **elements)
+void    clean_elements_array(char **elements)
 {
     int i;
     i = 0;
@@ -26,6 +26,7 @@ void clean_elements_array(char **elements)
     free(elements);
     elements = NULL;
 }
+
 void clean_partial_array(char **elements, int nb)
 {
     int i;

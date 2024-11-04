@@ -6,14 +6,13 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/04 15:10:19 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/04 16:58:05 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= cub3D
 OS		= $(shell uname)
 
-OBJ_DIR		= ./obj/
 LIB_DIR		= ./lib
 LIBFT_DIR 	= $(LIB_DIR)/libft/
 
@@ -22,51 +21,55 @@ LIBFT   = $(addprefix $(LIBFT_DIR), libft.a)
 CFLAGS = -Wall -Wextra -Werror -g3
 IFLAGS = -I ./includes/ -I $(LIBFT_DIR)includes/ -I $(MLX_DIR)
 
-SRC		 = main.c 	\
+SRC_DIR		= src
+OBJ_DIR		= obj
+INIT_DIR 	= $(SRC_DIR)/init
+PARSING_DIR = $(SRC_DIR)/parsing
+CLEANING_DIR = $(SRC_DIR)/clean-destroy
 
-PARSING  = parsing/check_walls.c parsing/parse_map.c parsing/parse_utils.c parsing/parse_utils2.c parsing/parse.c \
-		   parsing/get_map.c \
-		   parsing/print_test.c \
-		   parsing/store_elements.c \
-		   parsing/check_elements_and_map_name.c \
-		   parsing/format_elements.c
+SRC		 = main.c
+PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
+		get_map.c \
+		print_test.c \
+		store_elements.c \
+		check_elements_and_map_name.c \
+		format_elements.c
 		   
-INIT     = init/init_mlx.c \
-		   init/init_data.c \
-		   init/init_utils.c
-		   
-CLEANING = clean-destroy/clean.c \
-		   clean-destroy/destroy.c
+INIT     = init_mlx.c init_data.c init_utils.c
+CLEANING = clean.c destroy.c
 
-SRC_DIR		= ./src/
 
-SRCS := $(addprefix $(SRC_DIR), $(SRC))
-SRCS += $(addprefix $(SRC_DIR), $(PARSING))
-SRCS += $(addprefix $(SRC_DIR), $(CLEANING))
-SRCS += $(addprefix $(SRC_DIR), $(INIT))
-OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
+SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
+SRCS += $(addprefix $(INIT_DIR)/, $(INIT))
+SRCS += $(addprefix $(PARSING_DIR)/, $(PARSING))
+SRCS += $(addprefix $(CLEANING_DIR)/, $(CLEANING))
+
+OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 vpath %.c ./src/
 
 ifeq ($(OS), Linux)
+	SRCS += $(addprefix $(CLEANING_DIR)/, destroy_linux.c)
 	LIB_MLX = libmlx.a
 	MLX_DIR = $(LIB_DIR)/mlx_linux/
 	MLX = $(addprefix $(MLX_DIR), $(LIB_MLX))
 	MLX_LNK	= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 else ifeq ($(OS), Darwin)
+	SRCS += $(addprefix $(CLEANING_DIR)/, destroy_mac.c)
 	LIB_MLX = libmlx.dylib
 	MLX_DIR = $(LIB_DIR)/mlx/
 	MLX = $(addprefix $(MLX_DIR), $(LIB_MLX))
-	install_name_tool -id @executable_path/lib/mlx/$(LIB_MLX) $(MLX_DIR)$(LIB_MLX); \
 	MLX_LNK	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
+
+OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 vpath %.c ./src/
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	cc $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX_LNK)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	cc $(CFLAGS) $(IFLAGS) -c $< -o $@
 
@@ -75,6 +78,10 @@ $(LIBFT):
 
 $(MLX):
 	@make -C $(MLX_DIR)
+	@if [ "$(OS)" = "Darwin" ]; then \
+		install_name_tool -id @executable_path/lib/mlx/$(LIB_MLX) $(MLX_DIR)$(LIB_MLX); \
+	fi
+
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
