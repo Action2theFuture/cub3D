@@ -6,24 +6,22 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/01 04:12:25 by max              ###   ########.fr        #
+#    Updated: 2024/11/04 13:57:54 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= cub3D
+OS		= $(shell uname)
 
 OBJ_DIR		= ./obj/
 LIB_DIR		= ./lib
 LIBFT_DIR 	= $(LIB_DIR)/libft/
-MLX_DIR		= $(LIB_DIR)/minilibx-linux/
+MLX_DIR		=
 
-
-LIBFT  = $(addprefix $(LIBFT_DIR), libft.a)
-MLX	   = $(addprefix $(MLX_DIR), libmlx.a)
+LIBFT   = $(addprefix $(LIBFT_DIR), libft.a)
 
 CFLAGS = -Wall -Wextra -Werror -g3
-IFLAGS = -I ./includes/ -I $(LIBFT_DIR) -I $(MLX_DIR)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+IFLAGS = -I ./includes/ -I $(LIBFT_DIR)includes/ -I $(MLX_DIR)
 
 SRC		 = main.c 	\
 
@@ -51,8 +49,23 @@ OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 vpath %.c ./src/
 
-$(NAME): $(LIBFT) $(MLX) $(OBJS)
-	cc $(CFLAGS) $(OBJS) $(MLX) $(LIBFT) $(MLX_FLAGS) -o $@
+ifeq ($(OS), Linux)
+	LIB_MLX = libmlx.a
+	MLX_DIR = $(LIB_DIR)/mlx_linux/
+	MLX = $(addprefix $(MLX_DIR), $(LIB_MLX))
+	MLX_LNK	= -L$(MLX_DIR) -lmlx  -lXext -lX11 -lm -lz
+else ifeq ($(OS), Darwin)
+	LIB_MLX = libmlx.dylib
+	MLX_DIR = $(LIB_DIR)/mlx/
+	MLX = $(addprefix $(MLX_DIR), $(LIB_MLX))
+	install_name_tool -id @executable_path/lib/mlx/$(LIB_MLX) $(MLX_DIR)$(LIB_MLX); \
+	MLX_LNK	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+endif
+
+vpath %.c ./src/
+
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
+	cc $(CFLAGS) $(MLX_LNK) -o $@ $(OBJS) $(LIBFT)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)
@@ -62,8 +75,7 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(MLX):
-	@make -C $(MLX_DIR) 
-		--no-print-directory
+	@make -C $(MLX_DIR)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -72,6 +84,7 @@ all : $(NAME)
 
 clean :
 	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean : clean
