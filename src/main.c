@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:13:49 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:05:11 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 04:34:19 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int argc, char **argv)
         return 1;
     if (!init_mlx_and_data(&data,&desc_file))
         return 1;
+    raycast(&data);
     clean_and_destroy_all(&data,&desc_file);
     return 0;
 }

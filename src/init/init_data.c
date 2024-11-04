@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 03:49:23 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 16:12:34 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void init_player_view_angle(t_data *data, char c)
 {
     if (c == 'N')
-        data->player.view_angle = 0;
-    if (c == 'E')
         data->player.view_angle = 90;
+    if (c == 'E')
+        data->player.view_angle = 0;
     if (c == 'S')
-        data->player.view_angle = 180;
-    if (c == 'W')
         data->player.view_angle = 270;
+    if (c == 'W')
+        data->player.view_angle = 180;
 }
 
 void init_player_position(t_data *data)
@@ -51,7 +51,7 @@ void init_player_position(t_data *data)
 void init_vector(t_data *data)
 {
     data->player.dir_x = cos(degrees_to_radians(data->player.view_angle));
-    data->player.dir_y = sin(degrees_to_radians(data->player.view_angle));
+    data->player.dir_y = -sin(degrees_to_radians(data->player.view_angle));
     data->player.cam_vector_x = data->player.dir_y * tan(FOV / 2);
     data->player.cam_vector_y = -data->player.dir_x * tan(FOV / 2);
 }

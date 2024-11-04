@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 02:58:40 by max              ###   ########.fr       */
+/*   Updated: 2024/11/01 04:30:52 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void flood_fill(t_description_file *desc_file, int y, int x, bool *is_map_not_en
 bool check_map_name(char *argument);
 bool check_elements(char **elements);
 bool check_floor_and_ceiling_args(char *str);
-void format_elements (t_description_file *df);
+void format_elements(t_description_file *df);
 //-------------------- parse utils ------------------------------------------
 char *skype_space_ptr(char *str);
 int skype_space(char *str);
@@ -43,8 +43,11 @@ int ft_strlen_map(char *str);
 bool is_valid_player_char(char c);
 //-------------------- init MLX/data ---------------------------------------
 bool init_mlx_and_data(t_data *data, t_description_file *df);
-void init_data (t_data *data);
-//------------------------ clean ------------------------------------------------
+void init_data(t_data *data);
+double degrees_to_radians(double degrees);
+//-------------------- raycasting --------------------------------------------
+void raycast(t_data *data);
+//---------------------- clean ------------------------------------------------
 void clean_elements_array(char **elements);
 void clean_partial_array(char **elements, int i);
 void clean_elements(t_description_file *desc_file);
@@ -54,7 +57,6 @@ void clean_all(t_description_file *desc_file);
 void destroy_mlx_ptr(t_data *data);
 void clean_and_destroy_all(t_data *data, t_description_file *df);
 
-
-double degrees_to_radians(double degrees);
+void raycast(t_data *data);
 
 #endif

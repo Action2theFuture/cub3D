@@ -6,7 +6,7 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/01 04:12:25 by max              ###   ########.fr        #
+#    Updated: 2024/11/01 04:20:14 by max              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,19 +27,21 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 SRC		 = main.c 	\
 
-PARSING  = parsing/check_walls.c parsing/parse_map.c parsing/parse_utils.c parsing/parse_utils2.c parsing/parse.c \
-		   parsing/get_map.c \
-		   parsing/print_test.c \
-		   parsing/store_elements.c \
-		   parsing/check_elements_and_map_name.c \
-		   parsing/format_elements.c
+PARSING    = parsing/check_walls.c parsing/parse_map.c parsing/parse_utils.c parsing/parse_utils2.c parsing/parse.c \
+		     parsing/get_map.c \
+		     parsing/print_test.c \
+		     parsing/store_elements.c \
+		     parsing/check_elements_and_map_name.c \
+		     parsing/format_elements.c
 		   
-INIT     = init/init_mlx.c \
-		   init/init_data.c \
-		   init/init_utils.c
+INIT       = init/init_mlx.c \
+		     init/init_data.c \
+		     init/init_utils.c
+
+RAYCASTING = raycasting/raycasting_engine.c
 		   
-CLEANING = clean-destroy/clean.c \
-		   clean-destroy/destroy.c
+CLEANING   = clean-destroy/clean.c \
+		     clean-destroy/destroy.c
 
 SRC_DIR		= ./src/
 
@@ -47,6 +49,7 @@ SRCS := $(addprefix $(SRC_DIR), $(SRC))
 SRCS += $(addprefix $(SRC_DIR), $(PARSING))
 SRCS += $(addprefix $(SRC_DIR), $(CLEANING))
 SRCS += $(addprefix $(SRC_DIR), $(INIT))
+SRCS += $(addprefix $(SRC_DIR), $(RAYCASTING))
 OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 vpath %.c ./src/
