@@ -6,15 +6,24 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:30:44 by max               #+#    #+#             */
-/*   Updated: 2024/10/25 16:36:29 by max              ###   ########.fr       */
+/*   Updated: 2024/11/04 19:41:49 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
-#define CUBE_H
+# define CUBE_H
 
-#include "type.h"
-#include "config.h"
-#include "prototype.h"
+# include <mlx.h>
+# ifdef __linux__
+#  include <X11/keysym.h>
+#  include <X11/X.h>
+# endif
+
+# include "libft.h"
+# include "get_next_line.h"
+
+# include "type.h"
+# include "config.h"
+# include "prototype.h"
 
 #endif
