@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 17:13:49 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 20:05:11 by max              ###   ########.fr       */
+/*   Created: 2024/10/06 20:30:44 by max               #+#    #+#             */
+/*   Updated: 2024/11/04 16:52:17 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#ifndef CUBE_H
+# define CUBE_H
 
-int main(int argc, char **argv)
-{
-    t_description_file (desc_file) = {0};
-    t_data (data) = {0};
+# include <mlx.h>
+# ifdef __linux__
+#  include <X11/keysym.h>
+#  include <X11/X.h>
+# endif
 
-    if (argc != 2)
-        return (printf("Error\nInvalid number of arguments\n"), 1);
-    if (!parse(&desc_file, argv))
-        return 1;
-    if (!init_mlx_and_data(&data,&desc_file))
-        return 1;
-    clean_and_destroy_all(&data,&desc_file);
-    return 0;
-}
+# include "libft.h"
+# include "get_next_line.h"
+
+# include "type.h"
+# include "config.h"
+# include "prototype.h"
+
+#endif
