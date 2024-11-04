@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/04 14:05:30 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:52:28 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,12 @@
 # define WALL_HEIGHT 1.0
 # define PLAYER_VIEW_HEIGHT 0.5
 
-# include "cube.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
-# ifdef __linux__
-#  include "X11/keysym.h"
-#  include "../lib/minilibx-linux/mlx.h"
-# endif
 
 # include "prototype.h"
 
