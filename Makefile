@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
+#    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/04 19:40:44 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/05 12:38:31 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,23 +26,22 @@ OBJ_DIR		= obj
 INIT_DIR 	= $(SRC_DIR)/init
 PARSING_DIR = $(SRC_DIR)/parsing
 CLEANING_DIR = $(SRC_DIR)/clean-destroy
+DEBUG_DIR   = $(SRC_DIR)/debug
 
 SRC		 = main.c
 PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
-		get_map.c \
-		print_test.c \
-		store_elements.c \
-		check_elements_and_map_name.c \
-		format_elements.c
-		   
+		get_map.c store_elements.c check_elements_and_map_name.c \
+		format_elements.c 
 INIT     = init_mlx.c init_data.c init_utils.c
 CLEANING = clean.c destroy.c
+DEBUG    = debug.c
 
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 SRCS += $(addprefix $(INIT_DIR)/, $(INIT))
 SRCS += $(addprefix $(PARSING_DIR)/, $(PARSING))
 SRCS += $(addprefix $(CLEANING_DIR)/, $(CLEANING))
+SRCS += $(addprefix $(DEBUG_DIR)/, $(DEBUG))
 
 OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
@@ -88,6 +87,9 @@ $(OBJ_DIR):
 
 all : $(NAME)
 
+debug: CFLAGS += -g3 -fsanitize=address
+debug: fclean $(NAME)
+
 clean :
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
@@ -99,4 +101,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean debug re

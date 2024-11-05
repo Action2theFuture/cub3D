@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:13:49 by max               #+#    #+#             */
-/*   Updated: 2024/11/04 19:54:40 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:40:51 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_mlx_and_data(&data, &desc_file))
 		return (1);
+	print_desc_file(&desc_file);
 	clean_and_destroy_all(&data, &desc_file);
 	return (0);
 }
