@@ -6,7 +6,7 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/04 19:40:44 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/05 08:55:20 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,9 @@ $(OBJ_DIR):
 
 all : $(NAME)
 
+debug: CFLAGS += -g3 -fsanitize=address
+debug: fclean $(NAME)
+
 clean :
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
@@ -99,4 +102,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean debug re
