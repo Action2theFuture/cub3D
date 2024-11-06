@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/04 19:51:45 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 17:17:37 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,41 @@ typedef struct s_player
 	double	cam_vector_y;
 }	t_player;
 
-typedef struct s_data
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;	
+}	t_image;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	bool	hit;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+}	t_ray;
+
+typedef struct s_game
 {
 	t_description_file	*df;
 	t_mlx				mlx;
 	t_player			player;
+	t_image				img;
+	t_ray				ray;
 	int					screen_size_x;
 	int					screen_size_y;
-}	t_data;
-
+}	t_game;
 #endif

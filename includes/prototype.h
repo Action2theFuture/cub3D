@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/04 19:43:34 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 15:22:35 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPE_H
 # define PROTOTYPE_H
 
-# include "cube.h"
+# include "type.h"
+# include "config.h"
 
 //---------print a delete--------------------------------------------------
-void	print_map(t_description_file *desc_file);
-void	print_desc_file(t_description_file *desc_file);
-//-------------------------------------------------------------------------
+void	debug_map_and_df(t_description_file *df);
+
+//--------------------- utils-- -------------------------------------------
+double	degrees_to_radians(double degrees);
+
+//-------------------- init MLX/data ---------------------------------------
+void	init_data(t_game *game);
+bool	init_game(t_game *game, t_description_file *df);
 
 //--------------------- parsing -------------------------------------------
 bool	parse(t_description_file *desc_file, char **argv);
@@ -44,9 +50,25 @@ bool	validate_color_size(t_description_file *desc_file);
 bool	get_map(t_description_file *desc_file, char **argv);
 bool	is_valid_player_char(char c);
 
-//-------------------- init MLX/data ---------------------------------------
-bool	init_mlx_and_data(t_data *data, t_description_file *df);
-void	init_data(t_data *data);
+//------------------------ input -------------------------------------------
+int		key_press(int keycode, t_game *game);
+
+//------------------------ move --------------------------------------------
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+
+//----------------------- rotate -------------------------------------------
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+
+//-------------------- raycasting ------------------------------------------
+void	perform_raycasting(t_game *game);
+
+//-------------------- rendering -------------------------------------------
+void	put_pixel(t_game *game, int x, int y, int color);
+void	render_frame(t_game *game);
 
 //------------------------ clean -------------------------------------------
 void	clean_elements_array(char **elements);
@@ -56,9 +78,7 @@ void	clean_map(t_description_file *desc_file);
 void	clean_all(t_description_file *desc_file);
 
 //-----------------------destroy --------------------------------------------
-void	destroy_mlx_specific(t_data *data);
-void	clean_and_destroy_all(t_data *data, t_description_file *df);
-
-double	degrees_to_radians(double degrees);
+void	destroy_mlx_specific(t_game *game);
+void	clean_and_destroy_all(t_game *game, t_description_file *df);
 
 #endif
