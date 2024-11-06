@@ -6,29 +6,28 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:25:41 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:15:52 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 18:08:56 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	store_path(t_description_file *desc_file, char *element, int type)
+static void store_path(t_description_file *desc_file, char *element, int type)
 {
-	int	i;
-
-	i = 0;
-	if (element == NULL)
-		return ;
-	while (element[i] == 9 || element[i] == 32)
-		i++;
-	if (type == NO)
-		desc_file->elements.north_path = ft_strdup(&element[i]);
-	if (type == SO)
-		desc_file->elements.south_path = ft_strdup(&element[i]);
-	if (type == WE)
-		desc_file->elements.west_path = ft_strdup(&element[i]);
-	if (type == EA)
-		desc_file->elements.east_path = ft_strdup(&element[i]);
+    int i;
+    i = 0;
+    if (element == NULL)
+        return;
+    while (element[i] == 9 || element[i] == 32)
+        i++;
+    if (type == NO && desc_file->elements.north_path == NULL)
+        desc_file->elements.north_path = ft_strdup(&element[i]);
+    if (type == SO && desc_file->elements.south_path == NULL)
+        desc_file->elements.south_path = ft_strdup(&element[i]);
+    if (type == WE && desc_file->elements.west_path == NULL)
+        desc_file->elements.west_path = ft_strdup(&element[i]);
+    if (type == EA && desc_file->elements.east_path == NULL)
+        desc_file->elements.east_path = ft_strdup(&element[i]);
 }
 
 static bool	store_floor_color(t_description_file *desc_file, char *element)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 15:22:35 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 18:01:47 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	check_walls_surrounding_map(t_description_file *desc_file);
 bool	check_map_name(char *argument);
 bool	check_elements(char **elements);
 bool	check_floor_and_ceiling_args(char *str);
-void	format_elements(t_description_file *df);
+bool	format_elements(t_description_file *df);
 void	flood_fill(t_description_file *desc_file, \
 		int y, int x, bool *is_map_not_enclosed);
 
