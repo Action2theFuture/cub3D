@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 03:34:16 by max              ###   ########.fr       */
+/*   Updated: 2024/11/04 13:55:41 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ typedef struct s_player
     double pos_y;
     double view_angle;
     double view_distance;
-    double dir_x;
-    double dir_y;
+    double ray_angle;
+    double ray_vector_x;
+    double ray_vector_y;
     double cam_vector_x;
     double cam_vector_y;
     

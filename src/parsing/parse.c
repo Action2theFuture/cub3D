@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 03:51:28 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 17:41:58 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static bool check_and_store_elements(t_description_file *desc_file, char **eleme
         return false;
     if (!store_elements(desc_file, elements))
         return false;
-    format_elements(desc_file);
+    if (!format_elements(desc_file))
+        return (printf("Error\nInvalid ID elements\n"),false);
     if (malloc_failed(desc_file))
         return (printf("Error\nMalloc failled\n"), false);
     if (!validate_color_size(desc_file))

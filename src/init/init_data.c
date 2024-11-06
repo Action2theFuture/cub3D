@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 16:12:34 by max              ###   ########.fr       */
+/*   Updated: 2024/11/04 13:53:17 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void init_player_position(t_data *data)
 }
 void init_vector(t_data *data)
 {
-    data->player.dir_x = cos(degrees_to_radians(data->player.view_angle));
-    data->player.dir_y = -sin(degrees_to_radians(data->player.view_angle));
-    data->player.cam_vector_x = data->player.dir_y * tan(FOV / 2);
-    data->player.cam_vector_y = -data->player.dir_x * tan(FOV / 2);
+    data->player.ray_vector_x = cos(degrees_to_radians(data->player.view_angle));
+    data->player.ray_vector_y = -sin(degrees_to_radians(data->player.view_angle));
+    data->player.cam_vector_x = data->player.ray_vector_y * tan(FOV / 2);
+    data->player.cam_vector_y = -data->player.ray_vector_x * tan(FOV / 2);
 }
 
 void init_data(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:25:41 by max               #+#    #+#             */
-/*   Updated: 2024/10/26 14:36:00 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 17:47:43 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void store_path(t_description_file *desc_file, char *element, int type)
         return;
     while (element[i] == 9 || element[i] == 32)
         i++;
-    if (type == NO)
+    if (type == NO && desc_file->elements.north_path == NULL)
         desc_file->elements.north_path = ft_strdup(&element[i]);
-    if (type == SO)
+    if (type == SO && desc_file->elements.south_path == NULL)
         desc_file->elements.south_path = ft_strdup(&element[i]);
-    if (type == WE)
+    if (type == WE && desc_file->elements.west_path == NULL)
         desc_file->elements.west_path = ft_strdup(&element[i]);
-    if (type == EA)
+    if (type == EA && desc_file->elements.east_path == NULL)
         desc_file->elements.east_path = ft_strdup(&element[i]);
 }
 static bool store_floor_color(t_description_file *desc_file, char *element)
@@ -87,13 +87,13 @@ static bool store_color(t_description_file *desc_file, char *element, int type)
     if (type == F)
         if (!store_floor_color(desc_file, element))
         {
-            printf("Error\ncoucou");
+            printf("Error\nInvalid description file format\n");
             return false;
         }
     if (type == C)
         if (!store_ceiling_color(desc_file, element))
         {
-             printf("Error\ncoucou2");
+             printf("Error\nInvalid description file format\n");
             return false;
         }
 

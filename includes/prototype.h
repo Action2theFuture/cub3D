@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/01 04:30:52 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 17:37:07 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void flood_fill(t_description_file *desc_file, int y, int x, bool *is_map_not_en
 bool check_map_name(char *argument);
 bool check_elements(char **elements);
 bool check_floor_and_ceiling_args(char *str);
-void format_elements(t_description_file *df);
+bool format_elements(t_description_file *df);
 //-------------------- parse utils ------------------------------------------
 char *skype_space_ptr(char *str);
 int skype_space(char *str);
