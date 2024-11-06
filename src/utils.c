@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 22:05:03 by max               #+#    #+#             */
-/*   Updated: 2024/10/31 22:09:45 by max              ###   ########.fr       */
+/*   Created: 2024/11/06 10:13:33 by junsan            #+#    #+#             */
+/*   Updated: 2024/11/06 17:03:11 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void ft_mlx_loop (t_data *data)
+double	degrees_to_radians(double degrees)
 {
-    mlx_loop(data->mlx.ptr);
+	return (degrees * (M_PI / 180.0));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:30:44 by max               #+#    #+#             */
-/*   Updated: 2024/11/04 19:41:49 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 15:22:13 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #  include <X11/keysym.h>
 #  include <X11/X.h>
 # endif
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <math.h>
 
 # include "libft.h"
 # include "get_next_line.h"
