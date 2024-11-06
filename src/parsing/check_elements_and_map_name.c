@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:07:55 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 16:02:18 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:13:42 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	check_elements(char **elements)
 			return (printf("Error\nWrong ID element\n"), false);
 		if ((i == 4 || i == 5) && \
 			!check_floor_and_ceiling_args(&elements[i][j + 1]))
-			return (printf("Error\nWrong ceiling/floor format\n"), false);
+			return (printf("Error\nWrong ceiling/floor input\n"), false);
 		i++;
 	}
 	return (true);

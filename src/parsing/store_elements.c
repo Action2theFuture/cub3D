@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:25:41 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 18:08:56 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 22:09:05 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ static bool	store_color(t_description_file *desc_file, char *element, int type)
 	if (type == F)
 	{
 		if (!store_floor_color(desc_file, element))
-			return (printf("Error\ncoucou"), false);
+			return (printf("Error\nfloor input are not valid\n"), false);
 	}
 	if (type == C)
 	{
 		if (!store_ceiling_color(desc_file, element))
-			return (printf("Error\ncoucou2"), false);
+			return (printf("Error\nceiling input are not valid\n"), false);
 	}
 	return (true);
 }
@@ -120,10 +120,10 @@ bool	store_elements(t_description_file *desc_file, char **elements)
 			store_path(desc_file, tmp + 2, WE);
 		else if (!(ft_strncmp(tmp, "EA", 2)))
 			store_path(desc_file, tmp + 2, EA);
-		else if (!(ft_strncmp(tmp, "F", 1)))
-			store_color(desc_file, tmp + 1, F);
-		else if (!(ft_strncmp(tmp, "C", 1)))
-			store_color(desc_file, tmp + 1, C);
+	    else if (!(ft_strncmp(tmp, "F", 1)) && !store_color(desc_file, tmp + 1, F))
+            return false;
+        else if (!(ft_strncmp(tmp, "C", 1)) && !store_color(desc_file, tmp + 1, C))
+            return false;
 		i++;
 	}
 	return (true);
