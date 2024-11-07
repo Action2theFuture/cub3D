@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 18:01:47 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 05:46:33 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	clean_partial_array(char **elements, int i);
 void	clean_elements(t_description_file *desc_file);
 void	clean_map(t_description_file *desc_file);
 void	clean_all(t_description_file *desc_file);
+void	reach_end_of_file (t_description_file *desc_file, char ** elements);
 
 //-----------------------destroy --------------------------------------------
 void	destroy_mlx_specific(t_game *game);

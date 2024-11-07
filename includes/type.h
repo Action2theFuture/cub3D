@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 01:35:30 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 05:52:14 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_description_file
 	int			map_height;
 	char		**map;
 	bool		border_player;
+	bool		have_player;
 	t_elements	elements;
 
 }	t_description_file;

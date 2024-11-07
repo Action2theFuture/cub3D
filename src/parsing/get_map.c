@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:06:18 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 00:27:41 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 05:30:27 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	get_map_size(t_description_file *desc_file)
 			desc_file->elements_lines++;
 		else
 			end_of_elements = true;
-		if (end_of_elements == true && \
-			ft_strlen_map(line) > desc_file->map_width)
+		if (end_of_elements == true
+			&& ft_strlen_map(line) > desc_file->map_width)
 			desc_file->map_width = ft_strlen_map(line);
 		if (end_of_elements == true)
 			desc_file->map_height++;
@@ -80,8 +80,8 @@ static bool	extract_map_lines(t_description_file *desc_file)
 	{
 		desc_file->map[i] = get_next_line(desc_file->fd);
 		if (desc_file->map[i] == NULL)
-			return (printf("Error\nMalloc failed\n"), \
-			clean_partial_array(desc_file->map, i), false);
+			return (printf("Error\nMalloc failed\n"),
+				clean_partial_array(desc_file->map, i), false);
 		i++;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:11:31 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 04:11:53 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 05:06:10 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int key_press(int keycode, t_game *game)
 {
-	printf("\nKEY CODE = %d\n", keycode);
 	if (keycode == KEY_W)
 		move_forward(game);
 	else if (keycode == KEY_S)
