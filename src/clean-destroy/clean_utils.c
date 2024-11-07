@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_linux.c                                    :+:      :+:    :+:   */
+/*   clean_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 16:18:19 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 04:15:22 by max              ###   ########.fr       */
+/*   Created: 2024/11/07 05:42:34 by max               #+#    #+#             */
+/*   Updated: 2024/11/07 08:36:10 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	destroy_mlx_specific(t_game *game)
+void	reach_end_of_file(t_description_file *desc_file, char **elements)
 {
-	if (game->img.img)
-		mlx_destroy_image(game->mlx.ptr, game->img.img);
-	if (game->mlx.windows)
-		mlx_destroy_window(game->mlx.ptr, game->mlx.windows);
-	game->mlx.windows = NULL;
-	if (game->mlx.ptr)
-		mlx_destroy_display(game->mlx.ptr);
-	free(game->mlx.ptr);
-	game->mlx.ptr = NULL;
+	char	*str;
+
+	str = get_next_line(desc_file->fd);
+	while (str)
+	{
+		free(str);
+		str = get_next_line(desc_file->fd);
+	}
+	clean_elements_array(elements);
+	close(desc_file->fd);
+	clean_all(desc_file);
 }

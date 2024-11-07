@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:07:55 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 16:02:18 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 05:58:02 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 static bool	check_id_element(char *element)
 {
-	return (ft_strncmp(element, "NO", 2) == 0 || \
-			ft_strncmp(element, "SO", 2) == 0 || \
-			ft_strncmp(element, "WE", 2) == 0 || \
-			ft_strncmp(element, "EA", 2) == 0 || \
-			ft_strncmp(element, "F", 1) == 0 || \
-			ft_strncmp(element, "C", 1) == 0);
+	return (ft_strncmp(element, "NO", 2) == 0 || ft_strncmp(element, "SO",
+			2) == 0 || ft_strncmp(element, "WE", 2) == 0 || ft_strncmp(element,
+			"EA", 2) == 0 || ft_strncmp(element, "F", 1) == 0
+		|| ft_strncmp(element, "C", 1) == 0);
 }
 
 static bool	check_valide_char(char c)
 {
-	return (c == 9 || c == 32 || c == ',' || \
-	c == '\n' || (c >= '0' && c <= '9'));
+	return (c == 9 || c == 32 || c == ',' || c == '\n' || (c >= '0'
+			&& c <= '9'));
 }
 
 bool	check_map_name(char *argument)
@@ -56,10 +54,11 @@ bool	check_elements(char **elements)
 			return (printf("Error\nMalloc failled\n"), false);
 		j = skype_space(elements[i]);
 		if (!check_id_element(&elements[i][j]))
-			return (printf("Error\nWrong ID element\n"), false);
-		if ((i == 4 || i == 5) && \
-			!check_floor_and_ceiling_args(&elements[i][j + 1]))
-			return (printf("Error\nWrong ceiling/floor format\n"), false);
+			return (printf("Error\nWrong ID element or invalid numbers of \
+elements\n"), false);
+		if ((i == 4 || i == 5) && !check_floor_and_ceiling_args(&elements[i][j
+				+ 1]))
+			return (printf("Error\nWrong ceiling/floor input\n"), false);
 		i++;
 	}
 	return (true);

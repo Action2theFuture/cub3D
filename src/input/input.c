@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:11:31 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/06 15:55:57 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 08:38:08 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_RIGHT)
 		rotate_right(game);
 	else if (keycode == KEY_ESC)
-		return (clean_and_destroy_all(game, game->df), 0);
+	{
+		clean_and_destroy_all(game, game->df);
+		exit(EXIT_SUCCESS);
+	}
 	render_frame(game);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:21:12 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 04:07:53 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 #  define KEY_RIGHT 124
 #  define KEY_ESC   53
 # elif defined(__linux__)
-#  define KEY_W     119
-#  define KEY_A     97
+#  define KEY_W     122
+#  define KEY_A     113
 #  define KEY_S     115
 #  define KEY_D     100
 #  define KEY_LEFT  65361
@@ -60,3 +60,10 @@
 #  error "Unsupported platform. Please define key codes for your platform."
 # endif
 #endif
+// #  define KEY_W     119
+// #  define KEY_A     97
+// #  define KEY_S     115
+// #  define KEY_D     100
+// #  define KEY_LEFT  65361
+// #  define KEY_RIGHT 65363
+// #  define KEY_ESC   65307
