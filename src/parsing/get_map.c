@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:06:18 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:26:28 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 00:27:41 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static bool	extract_map_lines(t_description_file *desc_file)
 bool	get_map(t_description_file *desc_file, char **argv)
 {
 	get_map_size(desc_file);
+	if (desc_file->map_height == 0)
+		return (printf("Error\nNo map in the file\n"), false);
 	desc_file->fd = open(argv[1], O_RDONLY);
 	if (desc_file->fd == OPEN_FAILED)
 		return (printf("Error\nOpen file failed\n"), false);
@@ -98,7 +100,8 @@ bool	get_map(t_description_file *desc_file, char **argv)
 		return (false);
 	if (new_line_in_map(desc_file))
 		return (printf("Error\nNew line in map\n"), false);
-	parse_map(desc_file);
+	if (!parse_map(desc_file))
+		return (false);
 	close(desc_file->fd);
 	return (true);
 }

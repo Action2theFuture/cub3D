@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 18:06:51 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 00:13:55 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ bool parse(t_description_file *desc_file, char **argv)
         return (clean_elements_array(elements), close(desc_file->fd), clean_all(desc_file), false);
     }
     if (!get_map(desc_file, argv))
-        return (clean_elements_array(elements), close(desc_file->fd), false);
+        return (clean_elements_array(elements), close(desc_file->fd), clean_all(desc_file), false);
     if (!validate_map(desc_file))
         return (clean_all(desc_file), clean_elements_array(elements), close(desc_file->fd), false);
     clean_elements_array(elements);

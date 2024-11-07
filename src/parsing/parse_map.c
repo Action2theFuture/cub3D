@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 03:13:39 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:21:08 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:36:22 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	flood_fill(t_description_file *desc_file, \
 	if (x < 0 || y < 0 || x > desc_file->map_width - 1 || \
 		y > desc_file->map_height - 1 || desc_file->map[y][x] == WALL)
 		return ;
+	if (is_valid_player_char(desc_file->map[y][x]))
+	{
+		desc_file->border_player = true;
+		return;
+	}
 	if (desc_file->map[y][x] == ROAD)
 	{
 		*is_map_not_enclosed = true;
@@ -83,7 +88,7 @@ bool	parse_map(t_description_file *desc_file)
 		{
 			line = malloc((desc_file->map_width + 1) * sizeof(char));
 			if (!line)
-				return (false);
+				return (printf("Error\nMalloc failed\n"),false);
 			desc_file->map[i] = format_line(desc_file, desc_file->map[i], line);
 		}
 		else

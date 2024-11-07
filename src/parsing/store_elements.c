@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:25:41 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 22:09:05 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 23:05:06 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ static bool	store_color(t_description_file *desc_file, char *element, int type)
 	if (type == F)
 	{
 		if (!store_floor_color(desc_file, element))
-			return (printf("Error\nfloor input are not valid\n"), false);
+			return (printf("Error\nWrong floor input\n"), false);
 	}
 	if (type == C)
 	{
 		if (!store_ceiling_color(desc_file, element))
-			return (printf("Error\nceiling input are not valid\n"), false);
+			return (printf("Error\nWrong ceiling input\n"), false);
 	}
 	return (true);
 }

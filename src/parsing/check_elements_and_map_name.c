@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:07:55 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 22:13:42 by max              ###   ########.fr       */
+/*   Updated: 2024/11/06 22:45:26 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	check_elements(char **elements)
 			return (printf("Error\nMalloc failled\n"), false);
 		j = skype_space(elements[i]);
 		if (!check_id_element(&elements[i][j]))
-			return (printf("Error\nWrong ID element\n"), false);
+			return (printf("Error\nWrong ID element or invalid numbers of elements\n"), false);
 		if ((i == 4 || i == 5) && \
 			!check_floor_and_ceiling_args(&elements[i][j + 1]))
 			return (printf("Error\nWrong ceiling/floor input\n"), false);
