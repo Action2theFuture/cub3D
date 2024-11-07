@@ -6,13 +6,13 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:11:31 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 05:06:10 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 08:38:08 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int key_press(int keycode, t_game *game)
+int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_W)
 		move_forward(game);

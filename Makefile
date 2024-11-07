@@ -6,7 +6,7 @@
 #    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/07 05:44:28 by max              ###   ########.fr        #
+#    Updated: 2024/11/07 09:26:55 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,9 @@ SRC		 = main.c utils.c
 PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
 		get_map.c store_elements.c check_elements_and_map_name.c \
 		format_elements.c 
-INIT     = init_mlx.c init_data.c
+INIT     = init_game.c init_player.c direction_setup.c
 CLEANING = clean.c destroy.c clean_utils.c
-RENDERING = raycasting.c rendering.c
+RENDERING = raycasting.c rendering.c calculate.c dda.c
 INPUT = input.c move.c rotate.c
 DEBUG    = debug.c
 

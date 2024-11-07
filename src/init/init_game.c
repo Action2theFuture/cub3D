@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 15:54:17 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 09:13:37 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	init_game(t_game *game, t_description_file *df)
 	if (!init_mlx(game, df))
 		return (false);
 	game->df = df;
-	init_data(game);
+	init_player(game);
 	debug_map_and_df(df);
 	render_frame(game);
 	return (true);

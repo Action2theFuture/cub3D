@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 05:42:34 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:56:01 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 08:36:10 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	reach_end_of_file(t_description_file *desc_file, char **elements)
 {
-	char *str;
+	char	*str;
+
 	str = get_next_line(desc_file->fd);
 	while (str)
 	{

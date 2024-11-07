@@ -1,62 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:13:16 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/07 09:35:34 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+//printf("Player direction set to: (%.2f, %.2f), Plane: (%.2f, %.2f)\n", \
+//game->player.dir_x, game->player.dir_y, game->player.cam_vector_x, \
+//game->player.cam_vector_y);
 static void	init_player_view_angle(t_game *game, char direction)
 {
 	double	fov_rad;
 	double	plane_len;
 
-
 	fov_rad = degrees_to_radians(FOV_DEGREE);
 	plane_len = tan(fov_rad / 2.0);
 	if (direction == 'N')
-	{
-		game->player.dir_x = 0.0;
-		game->player.dir_y = -1.0;
-		game->player.cam_vector_x = plane_len;
-		game->player.cam_vector_y = 0.0;
-	}
+		set_direction_north(game, plane_len);
 	else if (direction == 'S')
-	{
-		game->player.dir_x = 0.0;
-		game->player.dir_y = 1.0;
-		game->player.cam_vector_x = -plane_len;
-		game->player.cam_vector_y = 0.0;
-	}
+		set_direction_south(game, plane_len);
 	else if (direction == 'E')
-	{
-		game->player.dir_x = 1.0;
-		game->player.dir_y = 0.0;
-		game->player.cam_vector_x = 0.0;
-		game->player.cam_vector_y = plane_len;
-	}
+		set_direction_east(game, plane_len);
 	else if (direction == 'W')
-	{
-		game->player.dir_x = -1.0;
-		game->player.dir_y = 0.0;
-		game->player.cam_vector_x = 0.0;
-		game->player.cam_vector_y = -plane_len;
-	}
+		set_direction_west(game, plane_len);
 	else
 	{
 		fprintf(stderr, "Error: Invalid player direction '%c'\n", direction);
 		clean_and_destroy_all(game, game->df);
 		exit(EXIT_FAILURE);
 	}
-	printf("Player direction set to: (%.2f, %.2f), Plane: (%.2f, %.2f)\n", \
-	game->player.dir_x, game->player.dir_y, game->player.cam_vector_x, \
-	game->player.cam_vector_y);
+}
+
+bool	set_player_position(t_game *game, int x, int y, char direction)
+{
+	if (game->player.pos_x != -1 && game->player.pos_y != -1)
+	{
+		fprintf(stderr, "Error: Multiple player start positions found.\n");
+		clean_and_destroy_all(game, game->df);
+		exit(EXIT_FAILURE);
+	}
+	init_player_view_angle(game, direction);
+	game->player.pos_x = x + 0.5;
+	game->player.pos_y = y + 0.5;
+	game->df->map[y][x] = '0';
+	printf("Player initialized at position: (%.2f, %.2f)", \
+		game->player.pos_x, game->player.pos_y);
+	printf("with direction vector (%.2f, %.2f)\n", \
+		game->player.dir_x, game->player.dir_y);
+	return (true);
+}
+
+static void	no_player_error(t_game *game)
+{
+	fprintf(stderr, "Error: No player start position found in the map.\n");
+	clean_and_destroy_all(game, game->df);
+	exit(EXIT_FAILURE);
 }
 
 static void	init_player_position(t_game *game)
@@ -67,6 +72,8 @@ static void	init_player_position(t_game *game)
 	char	direction;
 
 	player_found = false;
+	game->player.pos_x = -1;
+	game->player.pos_y = -1;
 	y = 0;
 	while (y < game->df->map_height)
 	{
@@ -75,35 +82,18 @@ static void	init_player_position(t_game *game)
 		{
 			if (is_valid_player_char(game->df->map[y][x]))
 			{
-				if (player_found)
-				{
-					fprintf(stderr, "Error: Multiple player start positions found.\n");
-					clean_and_destroy_all(game, game->df);
-					exit(EXIT_FAILURE);
-				}
 				direction = game->df->map[y][x];
-				init_player_view_angle(game, direction);
-				game->player.pos_x = x + 0.5;
-				game->player.pos_y = y + 0.5;
-				player_found = true;
-				game->df->map[y][x] = '0';
-				printf("Player initialized at position: (%.2f, %.2f) with direction vector (%.2f, %.2f)\n",
-				game->player.pos_x, game->player.pos_y, game->player.dir_x, game->player.dir_y);
+				player_found = set_player_position(game, x, y, direction);
 			}
 			x++;
 		}
 		y++;
 	}
 	if (!player_found)
-	{
-		fprintf(stderr, "Error: No player start position found in the map.\n");
-		clean_and_destroy_all(game, game->df);
-		exit(EXIT_FAILURE);
-	}
-	return ;
+		no_player_error(game);
 }
 
-void	init_data(t_game *game)
+void	init_player(t_game *game)
 {
 	init_player_position(game);
 	game->player.view_distance = \

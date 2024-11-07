@@ -6,7 +6,7 @@
 /*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:46:33 by max              ###   ########.fr       */
+/*   Updated: 2024/11/07 09:28:52 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	debug_map_and_df(t_description_file *df);
 double	degrees_to_radians(double degrees);
 
 //-------------------- init MLX/data ---------------------------------------
-void	init_data(t_game *game);
+void	init_player(t_game *game);
+void	set_direction_north(t_game *game, double plane_len);
+void	set_direction_south(t_game *game, double plane_len);
+void	set_direction_east(t_game *game, double plane_len);
+void	set_direction_west(t_game *game, double plane_len);
 bool	init_game(t_game *game, t_description_file *df);
 
 //--------------------- parsing -------------------------------------------
@@ -70,13 +74,25 @@ void	perform_raycasting(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);
 void	render_frame(t_game *game);
 
+//-------------------------- dda -------------------------------------------
+void	init_dda(t_game *game, \
+					double ray_dir_x, double ray_dir_y, t_ray *ray);
+void	perform_dda(t_game *game, t_ray *ray);
+
+//-------------------- calcualte -------------------------------------------
+double	calculate_perp_wall_dist(t_game *game, t_ray *ray);
+int		calculate_wall_dimensions(t_game *game, \
+						double perp_wall_dist, int *draw_start, int *draw_end);
+void	calculate_ray_direction(t_game *game, \
+						int x, double *ray_dir_x, double *ray_dir_y);
+
 //------------------------ clean -------------------------------------------
 void	clean_elements_array(char **elements);
 void	clean_partial_array(char **elements, int i);
 void	clean_elements(t_description_file *desc_file);
 void	clean_map(t_description_file *desc_file);
 void	clean_all(t_description_file *desc_file);
-void	reach_end_of_file (t_description_file *desc_file, char ** elements);
+void	reach_end_of_file(t_description_file *desc_file, char **elements);
 
 //-----------------------destroy --------------------------------------------
 void	destroy_mlx_specific(t_game *game);
