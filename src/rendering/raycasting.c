@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 04:18:51 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:36:45 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 19:16:03 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 static int	clamp_and_flip_tex_x(int tex_x, t_game *game)
 {
-	int	side;
 	int	tex_width;
 
-	side = game->ray.side;
-	if (side == NORTH || side == SOUTH)
+	if (game->ray.side == NORTH)
 		tex_width = game->mlx.north_texture.width;
-	else
+	else if (game->ray.side == SOUTH)
+		tex_width = game->mlx.south_texture.width;
+	else if (game->ray.side == EAST)
 		tex_width = game->mlx.east_texture.width;
-	if ((side == SOUTH && game->ray.ray_dir_x > 0) || \
-		(side == NORTH && game->ray.ray_dir_x < 0) || \
-		(side == EAST && game->ray.ray_dir_y < 0) || \
-		(side == WEST && game->ray.ray_dir_y > 0))
-		tex_x = tex_width - tex_x - 1;
+	else
+		tex_width = game->mlx.west_texture.width;
 	if (tex_x < 0)
 		tex_x = 0;
 	if (tex_x >= tex_width)
 		tex_x = tex_width - 1;
+	if (game->ray.side == EAST || game->ray.side == SOUTH)
+		tex_x = tex_width - tex_x - 1;
 	return (tex_x);
 }
 
