@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:26:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 09:30:01 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:36:12 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_dda(t_game *game, \
 		ray->delta_dist_y = fabs(1 / ray_dir_y);
 	set_ray_direction(game, ray_dir_x, ray_dir_y, ray);
 	ray->hit = false;
-	ray->side = 0;
+	ray->side = NORTH;
 }
 
 static bool	check_boundary_collision(t_game *game, t_ray *ray)
@@ -71,22 +71,33 @@ static bool	check_boundary_collision(t_game *game, t_ray *ray)
 	return (false);
 }
 
+static void	update_ray(t_ray *ray)
+{
+	if (ray->side_dist_x < ray->side_dist_y)
+	{
+		ray->side_dist_x += ray->delta_dist_x;
+		ray->map_x += ray->step_x;
+		if (ray->step_x > 0)
+			ray->side = WEST;
+		else
+			ray->side = EAST;
+	}
+	else
+	{
+		ray->side_dist_y += ray->delta_dist_y;
+		ray->map_y += ray->step_y;
+		if (ray->step_y > 0)
+			ray->side = NORTH;
+		else
+			ray->side = SOUTH;
+	}
+}
+
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == false)
 	{
-		if (ray->side_dist_x < ray->side_dist_y)
-		{
-			ray->side_dist_x += ray->delta_dist_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist_y += ray->delta_dist_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
-		}
+		update_ray(ray);
 		if (check_boundary_collision(game, ray))
 		{
 			ray->hit = true;

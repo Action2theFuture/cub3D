@@ -6,35 +6,45 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 09:13:37 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 17:30:44 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static bool	load_texture(t_game *game, t_description_file *df)
+static bool	load_single_texture(void *mlx_ptr, t_texture *texture, char *path)
 {
-	int	x;
-	int	y;
+	int	width;
+	int	height;
 
-	x = 128;
-	y = 128;
-	game->mlx.north_texture = mlx_xpm_file_to_image(\
-							game->mlx.ptr, df->elements.north_path, &x, &y);
-	if (game->mlx.north_texture == NULL)
-		return (clean_and_destroy_all(game, df), false);
-	game->mlx.south_texture = mlx_xpm_file_to_image(\
-							game->mlx.ptr, df->elements.south_path, &x, &y);
-	if (game->mlx.south_texture == NULL)
-		return (clean_and_destroy_all(game, df), false);
-	game->mlx.west_texture = mlx_xpm_file_to_image(\
-							game->mlx.ptr, df->elements.west_path, &x, &y);
-	if (game->mlx.west_texture == NULL)
-		return (clean_and_destroy_all(game, df), false);
-	game->mlx.east_texture = mlx_xpm_file_to_image(\
-							game->mlx.ptr, df->elements.east_path, &x, &y);
-	if (game->mlx.east_texture == NULL)
-		return (clean_and_destroy_all(game, df), false);
+	texture->img = mlx_xpm_file_to_image(mlx_ptr, path, &width, &height);
+	if (!texture->img)
+	{
+		fprintf(stderr, "Error: Failed to load texture: %s\n", path);
+		return (false);
+	}
+	texture->addr = mlx_get_data_addr(\
+					texture->img, &texture->bits_per_pixel, \
+					&texture->line_length, &texture->endian);
+	texture->width = width;
+	texture->height = height;
+	return (true);
+}
+
+static bool	load_textures(t_game *game, t_description_file *df)
+{
+	if (!load_single_texture(\
+		game->mlx.ptr, &game->mlx.north_texture, df->elements.north_path) || \
+		!load_single_texture(\
+		game->mlx.ptr, &game->mlx.south_texture, df->elements.south_path) || \
+		!load_single_texture(\
+		game->mlx.ptr, &game->mlx.east_texture, df->elements.east_path) || \
+		!load_single_texture(\
+		game->mlx.ptr, &game->mlx.west_texture, df->elements.west_path))
+	{
+		clean_and_destroy_all(game, df);
+		return (false);
+	}
 	return (true);
 }
 
@@ -56,7 +66,7 @@ static bool	init_mlx(t_game *game, t_description_file *df)
 		return (printf("Error\n,MLX init failed\n"), clean_all(df), false);
 	if (!init_window(game, df))
 		return (printf("Error\nMLX init windows failed\n"), false);
-	if (!load_texture(game, df))
+	if (!load_textures(game, df))
 		return (printf("Error\nMLX init image failed\n"), false);
 	return (true);
 }
@@ -67,7 +77,8 @@ bool	init_game(t_game *game, t_description_file *df)
 		return (false);
 	game->df = df;
 	init_player(game);
-	debug_map_and_df(df);
+	if (DEBUG_MODE)
+		debug_map_and_df(df);
 	render_frame(game);
 	return (true);
 }

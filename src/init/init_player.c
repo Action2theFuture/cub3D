@@ -6,15 +6,16 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 09:35:34 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:40:35 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-//printf("Player direction set to: (%.2f, %.2f), Plane: (%.2f, %.2f)\n", \
-//game->player.dir_x, game->player.dir_y, game->player.cam_vector_x, \
-//game->player.cam_vector_y);
+/*printf("Player direction set to: (%.2f, %.2f), Plane: (%.2f, %.2f)\n", \
+game->player.dir_x, game->player.dir_y, game->player.cam_vector_x, \
+game->player.cam_vector_y);
+*/
 static void	init_player_view_angle(t_game *game, char direction)
 {
 	double	fov_rad;

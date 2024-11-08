@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 09:28:52 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:34:16 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,32 @@ void	move_right(t_game *game);
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
 
-//-------------------- raycasting ------------------------------------------
-void	perform_raycasting(t_game *game);
-
-//-------------------- rendering -------------------------------------------
-void	put_pixel(t_game *game, int x, int y, int color);
-void	render_frame(t_game *game);
-
 //-------------------------- dda -------------------------------------------
 void	init_dda(t_game *game, \
 					double ray_dir_x, double ray_dir_y, t_ray *ray);
 void	perform_dda(t_game *game, t_ray *ray);
 
-//-------------------- calcualte -------------------------------------------
+//-------------------- calculate -------------------------------------------
 double	calculate_perp_wall_dist(t_game *game, t_ray *ray);
-int		calculate_wall_dimensions(t_game *game, \
-						double perp_wall_dist, int *draw_start, int *draw_end);
 void	calculate_ray_direction(t_game *game, \
 						int x, double *ray_dir_x, double *ray_dir_y);
+void	calculate_draw_pos(\
+				int line_height, int screen_size_y, int draw_pos[2]);
+void	calculate_wall_and_tex_x(\
+	t_game *game, double perp_wall_dist, double *wall_x, int *tex_x);
+int		calculate_wall_dimensions(t_game *game, \
+						double perp_wall_dist, int *draw_start, int *draw_end);
+
+//-------------------- raycasting ------------------------------------------
+void	draw_wall_column(\
+		t_game *game, int x, int draw_pos[2], double perp_wall_dist);
+void	put_pixel(t_game *game, int x, int y, int color);
+void	perform_raycasting(t_game *game);
+
+//-------------------- rendering -------------------------------------------
+void	put_pixel(t_game *game, int x, int y, int color);
+int		get_pixel_color(t_texture texture, int x, int y);
+void	render_frame(t_game *game);
 
 //------------------------ clean -------------------------------------------
 void	clean_elements_array(char **elements);

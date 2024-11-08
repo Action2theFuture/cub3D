@@ -3,12 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: max <max@student.42.fr>                    +#+  +:+       +#+         #
+#    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/07 09:26:55 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/08 17:29:54 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+COLOR_RESET = \033[0m
+COLOR_RED = \033[1;31m
+COLOR_GREEN = \033[1;32m
+COLOR_YELLOW = \033[1;33m
+COLOR_BLUE = \033[1;34m
+COLOR_CYAN = \033[1;36m
 
 NAME 	= cub3D
 OS		= $(shell uname)
@@ -71,17 +78,19 @@ OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 vpath %.c ./src/
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	cc $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX_LNK)
+	@cc $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX_LNK) > /dev/null 2>&1
+	@echo "$(COLOR_GREEN)Program Name : $(NAME)$(COLOR_RESET)"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	cc $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@cc $(CFLAGS) $(IFLAGS) -c $< -o $@ > /dev/null 2>&1
 
 $(LIBFT): 
-	@make -C $(LIBFT_DIR)
+	@make -sC $(LIBFT_DIR)
+	@echo "$(COLOR_BLUE)Compliling Obj files...$(COLOR_RESET)"
 
 $(MLX):
-	@make -C $(MLX_DIR)
+	@make -sC $(MLX_DIR)
 	@if [ "$(OS)" = "Darwin" ]; then \
 		install_name_tool -id @executable_path/lib/mlx/$(LIB_MLX) $(MLX_DIR)$(LIB_MLX); \
 	fi
@@ -92,17 +101,20 @@ $(OBJ_DIR):
 
 all : $(NAME)
 
-debug: CFLAGS += -g3 -fsanitize=address
+debug: CFLAGS += -g3 -fsanitize=address -DDEBUG=1
 debug: fclean $(NAME)
 
+
 clean :
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(MLX_DIR) clean
-	rm -rf $(OBJ_DIR)
+	@make -sC $(LIBFT_DIR) clean
+	@make -sC $(MLX_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(COLOR_RED)Cleaning completed successfully 🧹$(COLOR_RESET)"
 
 fclean : clean
-	@make -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
+	@make -sC $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
+	@echo "$(COLOR_RED)Full Cleaning completed successfully 🧹$(COLOR_RESET)"
 
 re : fclean all
 
