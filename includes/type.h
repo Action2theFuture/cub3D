@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 12:09:24 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:38:15 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ typedef struct s_description_file
 
 }	t_description_file;
 
-typedef struct s_texture {
-    void    *img;           // MLX 이미지 포인터
-    char    *addr;          // 이미지 데이터 주소
-    int     width;          // 텍스처의 너비
-    int     height;         // 텍스처의 높이
-    int     bits_per_pixel; // 비트 당 픽셀 수
-    int     line_length;    // 한 줄의 바이트 수
-    int     endian;         // 엔디안 여부
-} t_texture;
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
 
 typedef struct s_mlx
 {
-	void	*ptr;
-	void	*windows;
+	void		*ptr;
+	void		*windows;
 	t_texture	north_texture;
 	t_texture	south_texture;
 	t_texture	east_texture;
@@ -94,6 +95,8 @@ typedef struct s_ray
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
+	double	step;
+	double	tex_pos;
 	bool	hit;
 	int		map_x;
 	int		map_y;

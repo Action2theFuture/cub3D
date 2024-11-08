@@ -6,36 +6,30 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:18:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/08 12:29:06 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:21:18 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-// void	put_pixel(t_game *game, int x, int y, int color)
-// {
-// 	int	pixel;
-
-// 	if (x < 0 || x >= game->screen_size_x || y < 0 || y >= game->screen_size_y)
-// 		return ;
-// 	pixel = (y * game->img.line_length) + (x * (game->img.bits_per_pixel / 8));
-// 	if (pixel >= 0 && pixel < (game->screen_size_x * game->screen_size_y * \
-// 		(game->img.bits_per_pixel / 8)))
-// 	{
-// 		game->img.addr[pixel] = color & 0xFF;
-// 		game->img.addr[pixel + 1] = (color >> 8) & 0xFF;
-// 		game->img.addr[pixel + 2] = (color >> 16) & 0xFF;
-// 	}
-// }
-
-void put_pixel(t_game *game, int x, int y, int color)
+int	get_pixel_color(t_texture texture, int x, int y)
 {
-    char *dst;
+	char	*pixel;
 
-    if (x < 0 || x >= game->screen_size_x || y < 0 || y >= game->screen_size_y)
-        return;
-    dst = game->img.addr + (y * game->img.line_length + x * (game->img.bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+	pixel = texture.addr + \
+		(y * texture.line_length + x * (texture.bits_per_pixel / 8));
+	return (*(unsigned int *)pixel);
+}
+
+void	put_pixel(t_game *game, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= game->screen_size_x || y < 0 || y >= game->screen_size_y)
+		return ;
+	dst = game->img.addr + \
+		(y * game->img.line_length + x * (game->img.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
 static int	init_image(t_game	*game)

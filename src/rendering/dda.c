@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:26:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/08 12:59:34 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 16:36:12 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,33 @@ static bool	check_boundary_collision(t_game *game, t_ray *ray)
 	return (false);
 }
 
+static void	update_ray(t_ray *ray)
+{
+	if (ray->side_dist_x < ray->side_dist_y)
+	{
+		ray->side_dist_x += ray->delta_dist_x;
+		ray->map_x += ray->step_x;
+		if (ray->step_x > 0)
+			ray->side = WEST;
+		else
+			ray->side = EAST;
+	}
+	else
+	{
+		ray->side_dist_y += ray->delta_dist_y;
+		ray->map_y += ray->step_y;
+		if (ray->step_y > 0)
+			ray->side = NORTH;
+		else
+			ray->side = SOUTH;
+	}
+}
+
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == false)
 	{
-		if (ray->side_dist_x < ray->side_dist_y)
-		{
-			ray->side_dist_x += ray->delta_dist_x;
-			ray->map_x += ray->step_x;
-			if (ray->step_x > 0)
-				ray->side = WEST; // 동쪽에서 서쪽으로 향하는 벽
-			else
-				ray->side = EAST; // 서쪽에서 동쪽으로 향하는 벽
-		}
-		else
-		{
-			ray->side_dist_y += ray->delta_dist_y;
-			ray->map_y += ray->step_y;
-			if (ray->step_y > 0)
-				ray->side = NORTH; // 남쪽에서 북쪽으로 향하는 벽
-			else
-				ray->side = SOUTH; // 북쪽에서 남쪽으로 향하는 벽
-		}
+		update_ray(ray);
 		if (check_boundary_collision(game, ray))
 		{
 			ray->hit = true;
