@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:09:39 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 17:30:44 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ bool	init_game(t_game *game, t_description_file *df)
 		return (false);
 	game->df = df;
 	init_player(game);
-	debug_map_and_df(df);
+	if (DEBUG_MODE)
+		debug_map_and_df(df);
 	render_frame(game);
 	return (true);
 }

@@ -9,7 +9,8 @@ OBJ=$(SRC:.swift=.o)
 
 C_SRC= mlx_xpm.c mlx_png.c mlx_string_put.c
 C_OBJ=$(C_SRC:.c=.o)
-CFLAGS=-O3
+CFLAGS=-O3 -Wno-deprecated-non-prototype
+SWIFTCFLAGS = -suppress-warnings
 
 NAME=libmlx.dylib
 
@@ -24,10 +25,10 @@ $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 
 
 %.o: %.swift
-	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
+	swiftc $(SWIFTCFLAGS) $(OPTI) $(INC) -parse-as-library -c $< -o $@ > /dev/null 2>&1
 
 %.swiftmodule: %.swift
-	swiftc $(OPTI) $(INC) -parse-as-library -c $< -emit-module -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<)
+	swiftc $(SWIFTCFLAGS) $(OPTI) $(INC) -parse-as-library -c $< -emit-module -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<) > /dev/null 2>&1
 
 clean:
 	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~

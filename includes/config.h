@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 13:46:42 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 17:36:33 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 # define CONFIG_H
 
 # define CUB3D "Cub3D"
+# define CONTROLOR_PATH "./assets/controlor"
+
+# define RESET	"\e[0m"
+# define PRINT_BLACK	"\e[30m"
+# define PRINT_RED	"\e[31m"
+# define PRINT_GREEN	"\e[32m"
+# define PRINT_YELLOW	"\e[33m"
+# define PRINT_BLUE	"\e[34m"
+# define PRINT_PURPLE	"\e[35m"
+# define PRINT_CYAN	"\e[36m"
+# define PRINT_WHITE	"\e[37m"
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
