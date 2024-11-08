@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:52:14 by max              ###   ########.fr       */
+/*   Updated: 2024/11/08 12:09:24 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,24 @@ typedef struct s_description_file
 
 }	t_description_file;
 
+typedef struct s_texture {
+    void    *img;           // MLX 이미지 포인터
+    char    *addr;          // 이미지 데이터 주소
+    int     width;          // 텍스처의 너비
+    int     height;         // 텍스처의 높이
+    int     bits_per_pixel; // 비트 당 픽셀 수
+    int     line_length;    // 한 줄의 바이트 수
+    int     endian;         // 엔디안 여부
+} t_texture;
+
 typedef struct s_mlx
 {
 	void	*ptr;
 	void	*windows;
-	void	*north_texture;
-	void	*south_texture;
-	void	*east_texture;
-	void	*west_texture;
+	t_texture	north_texture;
+	t_texture	south_texture;
+	t_texture	east_texture;
+	t_texture	west_texture;
 }	t_mlx;
 
 typedef struct s_player

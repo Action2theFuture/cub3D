@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:26:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 09:30:01 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 12:59:34 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_dda(t_game *game, \
 		ray->delta_dist_y = fabs(1 / ray_dir_y);
 	set_ray_direction(game, ray_dir_x, ray_dir_y, ray);
 	ray->hit = false;
-	ray->side = 0;
+	ray->side = NORTH;
 }
 
 static bool	check_boundary_collision(t_game *game, t_ray *ray)
@@ -79,13 +79,19 @@ void	perform_dda(t_game *game, t_ray *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0;
+			if (ray->step_x > 0)
+				ray->side = WEST; // 동쪽에서 서쪽으로 향하는 벽
+			else
+				ray->side = EAST; // 서쪽에서 동쪽으로 향하는 벽
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1;
+			if (ray->step_y > 0)
+				ray->side = NORTH; // 남쪽에서 북쪽으로 향하는 벽
+			else
+				ray->side = SOUTH; // 북쪽에서 남쪽으로 향하는 벽
 		}
 		if (check_boundary_collision(game, ray))
 		{

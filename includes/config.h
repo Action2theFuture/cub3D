@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 04:07:53 by max              ###   ########.fr       */
+/*   Updated: 2024/11/08 13:46:42 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,18 @@
 # define WALL '1'
 # define ROAD '0'
 
+# define NORTH 0
+# define SOUTH 1
+# define EAST  2
+# define WEST  3
+
 # define BASE_VIEW_ANGLE 0.0
 # define FOV_DEGREE 66.0
 # define WALL_HEIGHT 1.0
 # define PLAYER_VIEW_HEIGHT 0.5
 
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.03
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.08
 
 # ifdef __APPLE__
 #  define KEY_W     13

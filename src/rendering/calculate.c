@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:39:00 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/07 08:40:03 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/08 13:06:27 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,10 @@ void	calculate_ray_direction(t_game *game, \
 
 double	calculate_perp_wall_dist(t_game *game, t_ray *ray)
 {
-	double	perp_wall_dist;
-
-	if (ray->side == 0)
-		perp_wall_dist = (ray->map_x - game->player.pos_x + \
-			(1 - ray->step_x) / 2.0) / ray->ray_dir_x;
-	else
-		perp_wall_dist = (ray->map_y - game->player.pos_y + \
-			(1 - ray->step_y) / 2.0) / ray->ray_dir_y;
-	return (perp_wall_dist);
+	 if (ray->side == NORTH || ray->side == SOUTH)
+        return (ray->map_y - game->player.pos_y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
+    else
+        return (ray->map_x - game->player.pos_x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 }
 
 int	calculate_wall_dimensions(t_game *game, \
