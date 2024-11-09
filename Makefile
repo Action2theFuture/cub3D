@@ -6,7 +6,7 @@
 #    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/08 17:29:54 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/09 12:31:42 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,9 @@ SRC		 = main.c utils.c
 PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
 		get_map.c store_elements.c check_elements_and_map_name.c \
 		format_elements.c 
-INIT     = init_game.c init_player.c direction_setup.c
+INIT     = init_game.c init_player.c init_minimap.c direction_setup.c
 CLEANING = clean.c destroy.c clean_utils.c
-RENDERING = raycasting.c rendering.c calculate.c dda.c
+RENDERING = raycasting.c rendering.c calculate.c dda.c minimap.c minimap_draw_utils.c
 INPUT = input.c move.c rotate.c
 DEBUG    = debug.c
 
@@ -83,7 +83,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	@cc $(CFLAGS) $(IFLAGS) -c $< -o $@ > /dev/null 2>&1
+	@cc $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT): 
 	@make -sC $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:38:15 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 13:02:26 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,7 @@ typedef struct s_game
 	t_ray				ray;
 	int					screen_size_x;
 	int					screen_size_y;
+	int					minimap_pos_x;
+	int					minimap_pos_y;
 }	t_game;
 #endif

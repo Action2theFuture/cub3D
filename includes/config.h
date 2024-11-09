@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 17:36:33 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 12:05:54 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.08
+
+# define MINIMAP_SCALE 10
 
 # ifdef __APPLE__
 #  define KEY_W     13

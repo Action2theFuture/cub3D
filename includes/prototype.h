@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:34:16 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 13:01:19 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	set_direction_north(t_game *game, double plane_len);
 void	set_direction_south(t_game *game, double plane_len);
 void	set_direction_east(t_game *game, double plane_len);
 void	set_direction_west(t_game *game, double plane_len);
+void	init_minimap(t_game *game);
 bool	init_game(t_game *game, t_description_file *df);
 
 //--------------------- parsing -------------------------------------------
@@ -82,6 +83,12 @@ void	calculate_wall_and_tex_x(\
 	t_game *game, double perp_wall_dist, double *wall_x, int *tex_x);
 int		calculate_wall_dimensions(t_game *game, \
 						double perp_wall_dist, int *draw_start, int *draw_end);
+
+//----------------------- map ----------------------------------------------
+double	calculate_distance_to_wall(t_game *game);
+bool	is_wall(t_game *game, int x, int y);
+void	init_line(int player_pos[2], int line_pos[2], int params[4], int *err);
+void	draw_minimap(t_game *game);
 
 //-------------------- raycasting ------------------------------------------
 void	draw_wall_column(\

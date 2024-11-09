@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 04:18:51 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:36:45 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 11:03:52 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	perform_raycasting(t_game *game)
 		process_single_ray(game, x);
 		x++;
 	}
+	draw_minimap(game);
 	mlx_put_image_to_window(\
 		game->mlx.ptr, game->mlx.windows, game->img.img, 0, 0);
 }
