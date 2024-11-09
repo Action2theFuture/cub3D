@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:26:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/08 16:36:12 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 16:58:58 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static void	update_ray(t_ray *ray)
 
 void	perform_dda(t_game *game, t_ray *ray)
 {
+	char	cur_tile;
+
 	while (ray->hit == false)
 	{
 		update_ray(ray);
@@ -103,7 +105,12 @@ void	perform_dda(t_game *game, t_ray *ray)
 			ray->hit = true;
 			break ;
 		}
-		if (game->df->map[ray->map_y][ray->map_x] == '1')
+		cur_tile = game->df->map[ray->map_y][ray->map_x];
+		if (cur_tile == '1')
 			ray->hit = true;
+		else if (cur_tile == CLOSED_DOOR)
+			ray->hit = true;
+		else if (cur_tile == OPENED_DOOR)
+			continue ;
 	}
 }

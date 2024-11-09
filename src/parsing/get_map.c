@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:06:18 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:30:27 by max              ###   ########.fr       */
+/*   Updated: 2024/11/09 17:36:40 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ static bool	extract_map_lines(t_description_file *desc_file)
 	i = 0;
 	desc_file->map = malloc(desc_file->map_height * sizeof(char *));
 	if (desc_file->map == NULL)
-		return (printf("Error\nMalloc failed\n"), false);
+		return (print_err(MALLOC_FAIL), false);
 	while (i < desc_file->map_height)
 	{
 		desc_file->map[i] = get_next_line(desc_file->fd);
 		if (desc_file->map[i] == NULL)
-			return (printf("Error\nMalloc failed\n"),
+			return (print_err(MALLOC_FAIL),
 				clean_partial_array(desc_file->map, i), false);
 		i++;
 	}
@@ -91,15 +91,15 @@ bool	get_map(t_description_file *desc_file, char **argv)
 {
 	get_map_size(desc_file);
 	if (desc_file->map_height == 0)
-		return (printf("Error\nNo map in the file\n"), false);
+		return (print_err(NO_MAP), false);
 	desc_file->fd = open(argv[1], O_RDONLY);
 	if (desc_file->fd == OPEN_FAILED)
-		return (printf("Error\nOpen file failed\n"), false);
+		return (print_err(FILE_OPEN_FAIL), false);
 	reach_map_start(desc_file);
 	if (!extract_map_lines(desc_file))
 		return (false);
 	if (new_line_in_map(desc_file))
-		return (printf("Error\nNew line in map\n"), false);
+		return (print_err(NEW_LINE), false);
 	if (!parse_map(desc_file))
 		return (false);
 	close(desc_file->fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:24:06 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:59:06 by max              ###   ########.fr       */
+/*   Updated: 2024/11/09 17:31:33 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ static bool	check_up_of_map(t_description_file *desc_file)
 	{
 		if (desc_file->map[0][i] == '0'
 			|| is_valid_player_char(desc_file->map[0][i]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->map[0][i] == 32)
 			flood_fill(desc_file, 0, i, &is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge\
-of the map\n"), false);
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
@@ -48,15 +47,14 @@ static bool	check_down_of_map(t_description_file *desc_file)
 		if (desc_file->map[desc_file->map_height - 1][i] == '0'
 			|| is_valid_player_char(desc_file->map[desc_file->map_height
 				- 1][i]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->map[desc_file->map_height - 1][i] == 32)
 			flood_fill(desc_file, desc_file->map_height - 1, i,
 				&is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of\
-the map\n"), false);
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
@@ -73,14 +71,13 @@ static bool	check_left_of_map(t_description_file *desc_file)
 	{
 		if (desc_file->map[i][0] == '0'
 			|| is_valid_player_char(desc_file->map[i][0]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->map[i][0] == 32)
 			flood_fill(desc_file, i, 0, &is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of the \
-map\n"), false);
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
@@ -98,15 +95,14 @@ static bool	check_right_of_map(t_description_file *desc_file)
 		if (desc_file->map[i][desc_file->map_width - 1] == '0'
 			|| is_valid_player_char(desc_file->map[i][desc_file->map_width
 				- 1]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->map[i][desc_file->map_width - 1] == 32)
 			flood_fill(desc_file, i, desc_file->map_width - 1,
 				&is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of the \
-map\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
 		i++;
 	}
 	return (true);

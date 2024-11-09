@@ -6,12 +6,14 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 13:02:26 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 16:59:59 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPE_H
 # define TYPE_H
+
+# include "config.h"
 
 typedef struct s_colors
 {
@@ -26,6 +28,7 @@ typedef struct s_elements
 	char		*south_path;
 	char		*east_path;
 	char		*west_path;
+	char		*door_path;
 	t_colors	floor;
 	t_colors	ceiling;
 }	t_elements;
@@ -58,6 +61,7 @@ typedef struct s_mlx
 {
 	void		*ptr;
 	void		*windows;
+	t_texture	door_texture;
 	t_texture	north_texture;
 	t_texture	south_texture;
 	t_texture	east_texture;
@@ -75,6 +79,13 @@ typedef struct s_player
 	double	cam_vector_x;
 	double	cam_vector_y;
 }	t_player;
+
+typedef struct s_door
+{
+	bool	is_door;
+	int		x;
+	int		y;
+}	t_door;
 
 typedef struct s_image
 {

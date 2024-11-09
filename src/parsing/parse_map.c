@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 03:13:39 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:30:30 by max              ###   ########.fr       */
+/*   Updated: 2024/11/09 17:32:55 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool	parse_map(t_description_file *desc_file)
 		{
 			line = malloc((desc_file->map_width + 1) * sizeof(char));
 			if (!line)
-				return (printf("Error\nMalloc failed\n"), false);
+				return (print_err(MALLOC_FAIL), false);
 			desc_file->map[i] = format_line(desc_file, desc_file->map[i], line);
 		}
 		else

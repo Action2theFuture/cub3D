@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 06:05:27 by max              ###   ########.fr       */
+/*   Updated: 2024/11/10 21:07:39 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ static bool	check_and_store_elements(t_description_file *desc_file,
 	if (!store_elements(desc_file, elements))
 		return (false);
 	if (!format_elements(desc_file))
-		return (printf("Error\nInvalid ID elements\n"), false);
+		return (print_err(INVALID_ELE), false);
 	if (malloc_failed(desc_file))
-		return (printf("Error\nMalloc failled\n"), false);
+		return (print_err(MALLOC_FAIL), false);
 	if (!validate_color_size(desc_file))
-		return (printf("Error\nInvalid color size\n"), false);
+		return (print_err(INVALID_COLOR_SIZE), false);
 	return (true);
 }
 
@@ -72,14 +72,14 @@ static bool	validate_map(t_description_file *desc_file)
 		j = 0;
 		while (j < desc_file->map_width - 1)
 		{
-			if (!is_valid_player_char(desc_file->map[i][j])
-				&& desc_file->map[i][j] != '0' && desc_file->map[i][j] != '1')
-				return (printf("Error\nInvalid character in the map\n"), false);
+			if (!is_valid_player_char(desc_file->map[i][j]) && \
+				desc_file->map[i][j] != '0' && desc_file->map[i][j] != '1' && \
+				desc_file->map[i][j] != CLOSED_DOOR)
+				return (print_err(INVALID_CHARCTOR), false);
 			if (is_valid_player_char(desc_file->map[i][j]))
 			{
 				if (desc_file->have_player == true)
-					return (printf("Error\nThe map have more than 1 player\n"),
-						false);
+					return (print_err(TOO_MANY_PLAYER), false);
 				desc_file->have_player = true;
 			}
 			j++;
@@ -87,7 +87,7 @@ static bool	validate_map(t_description_file *desc_file)
 		i++;
 	}
 	if (desc_file->have_player == false)
-		return (printf("Error\nNo player in the map\n"), false);
+		return (print_err(NO_PLAYER), false);
 	return (true);
 }
 
@@ -99,10 +99,10 @@ bool	parse(t_description_file *desc_file, char **argv)
 		return (false);
 	desc_file->fd = open(argv[1], O_RDONLY);
 	if (desc_file->fd == OPEN_FAILED)
-		return (printf("Error\nOpen file failed\n"), false);
+		return (print_err(FILE_OPEN_FAIL), false);
 	elements = get_elements(desc_file->fd, desc_file);
 	if (!elements)
-		return (printf("Error\nInvalid description file format\n"),
+		return (print_err(INVALID_FILE_FORMAT),
 			close(desc_file->fd), false);
 	if (!check_and_store_elements(desc_file, elements))
 		return (reach_end_of_file(desc_file, elements), false);

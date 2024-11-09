@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements_and_map_name.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:07:55 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:58:02 by max              ###   ########.fr       */
+/*   Updated: 2024/11/09 17:26:08 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	check_map_name(char *argument)
 		i++;
 	if (ft_strncmp(".cub", &argument[i - 4], 4))
 	{
-		printf("Error\nInvalid map name\n");
+		print_err(INVALID_MAP_NAME);
 		return (false);
 	}
 	return (true);
@@ -51,14 +51,13 @@ bool	check_elements(char **elements)
 	while (i < 6)
 	{
 		if (elements[i] == NULL)
-			return (printf("Error\nMalloc failled\n"), false);
+			return (print_err(MALLOC_FAIL), false);
 		j = skype_space(elements[i]);
 		if (!check_id_element(&elements[i][j]))
-			return (printf("Error\nWrong ID element or invalid numbers of \
-elements\n"), false);
-		if ((i == 4 || i == 5) && !check_floor_and_ceiling_args(&elements[i][j
-				+ 1]))
-			return (printf("Error\nWrong ceiling/floor input\n"), false);
+			return (print_err(INVALID_ELE), false);
+		if ((i == 4 || i == 5) && \
+		!check_floor_and_ceiling_args(&elements[i][j + 1]))
+			return (print_err(INVALID_INPUT_CEILING_FLOOR), false);
 		i++;
 	}
 	return (true);

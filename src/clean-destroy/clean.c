@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:50:43 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 15:28:19 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:00:06 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	clean_elements(t_description_file *desc_file)
 	{
 		free(desc_file->elements.west_path);
 		desc_file->elements.west_path = NULL;
+	}
+	if (desc_file->elements.door_path)
+	{
+		free(desc_file->elements.door_path);
+		desc_file->elements.door_path = NULL;
 	}
 }
 

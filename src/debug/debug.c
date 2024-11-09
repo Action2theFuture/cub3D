@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:17:19 by max               #+#    #+#             */
-/*   Updated: 2024/11/06 17:06:11 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 17:48:39 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ void	debug_map_and_df(t_description_file *df)
 {
 	print_map(df);
 	print_desc_file(df);
+}
+
+void	print_err(const char *msg)
+{
+	printf(PRINT_RED"\nERROR : %s\n", msg);
+	printf(RESET "\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:25:41 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:29:46 by max              ###   ########.fr       */
+/*   Updated: 2024/11/09 17:38:36 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	store_path(t_description_file *desc_file, char *element, int type)
 		desc_file->elements.west_path = ft_strdup(&element[i]);
 	if (type == EA && desc_file->elements.east_path == NULL)
 		desc_file->elements.east_path = ft_strdup(&element[i]);
+	if (type == D && desc_file->elements.door_path == NULL)
+		desc_file->elements.door_path = ft_strdup(&element[i]);
 }
 
 static bool	store_floor_color(t_description_file *desc_file, char *element)
@@ -94,12 +96,12 @@ static bool	store_color(t_description_file *desc_file, char *element, int type)
 	if (type == F)
 	{
 		if (!store_floor_color(desc_file, element))
-			return (printf("Error\nWrong floor input\n"), false);
+			return (print_err(INVALID_INPUT_FLOOR), false);
 	}
 	if (type == C)
 	{
 		if (!store_ceiling_color(desc_file, element))
-			return (printf("Error\nWrong ceiling input\n"), false);
+			return (print_err(INVALID_INPUT_CEILING), false);
 	}
 	return (true);
 }

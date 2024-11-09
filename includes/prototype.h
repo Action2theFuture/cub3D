@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 14:25:46 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 17:11:53 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 //---------print a delete--------------------------------------------------
 void	debug_map_and_df(t_description_file *df);
+void	print_err(const char *msg);
 
 //--------------------- utils-- -------------------------------------------
 double	degrees_to_radians(double degrees);
@@ -68,6 +69,7 @@ void	rotate_right(t_game *game);
 //------------------------ input -------------------------------------------
 int		mouse_move(int x, int y, t_game *game);
 int		key_press(int keycode, t_game *game);
+void	toggle_door(t_game *game);
 void	event_listener(t_game *game);
 
 //-------------------------- dda -------------------------------------------

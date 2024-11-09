@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:37 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:03:38 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static bool	load_textures(t_game *game, t_description_file *df)
 		clean_and_destroy_all(game, df);
 		return (false);
 	}
+	df->elements.door_path = "./textures/wolfenstein/eagle.xpm";
+	load_single_texture(\
+		game->mlx.ptr, &game->mlx.door_texture, df->elements.door_path);
 	return (true);
 }
 
@@ -63,11 +66,11 @@ static bool	init_mlx(t_game *game, t_description_file *df)
 {
 	game->mlx.ptr = mlx_init();
 	if (game->mlx.ptr == NULL)
-		return (printf("Error\n,MLX init failed\n"), clean_all(df), false);
+		return (print_err(MLX_INIT_FAIL), clean_all(df), false);
 	if (!init_window(game, df))
-		return (printf("Error\nMLX init windows failed\n"), false);
+		return (print_err(MLX_INIT_WINDOW_FAIL), false);
 	if (!load_textures(game, df))
-		return (printf("Error\nMLX init image failed\n"), false);
+		return (print_err(MLX_INIT_WINDOW_FAIL), false);
 	return (true);
 }
 
