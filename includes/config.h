@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 12:05:54 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 14:09:07 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.08
+# define ROT_SPEED_CONTROL 0.01
 
 # define MINIMAP_SCALE 10
 

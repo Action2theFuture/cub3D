@@ -6,7 +6,7 @@
 #    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/09 12:31:42 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/09 13:52:40 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
 INIT     = init_game.c init_player.c init_minimap.c direction_setup.c
 CLEANING = clean.c destroy.c clean_utils.c
 RENDERING = raycasting.c rendering.c calculate.c dda.c minimap.c minimap_draw_utils.c
-INPUT = input.c move.c rotate.c
+INPUT = input.c move.c rotate.c mouse.c
 DEBUG    = debug.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))

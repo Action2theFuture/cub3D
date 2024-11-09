@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 13:01:19 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 14:25:46 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ bool	validate_color_size(t_description_file *desc_file);
 bool	get_map(t_description_file *desc_file, char **argv);
 bool	is_valid_player_char(char c);
 
-//------------------------ input -------------------------------------------
-int		key_press(int keycode, t_game *game);
-
 //------------------------ move --------------------------------------------
 void	move_forward(t_game *game);
 void	move_backward(t_game *game);
@@ -67,6 +64,11 @@ void	move_right(t_game *game);
 //----------------------- rotate -------------------------------------------
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
+
+//------------------------ input -------------------------------------------
+int		mouse_move(int x, int y, t_game *game);
+int		key_press(int keycode, t_game *game);
+void	event_listener(t_game *game);
 
 //-------------------------- dda -------------------------------------------
 void	init_dda(t_game *game, \

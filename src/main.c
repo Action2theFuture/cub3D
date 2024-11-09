@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:13:49 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 10:24:59 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/09 14:36:04 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ static int	game_loop(t_game *game)
 	return (0);
 }
 
-static int	close_window(t_game *game)
-{
-	clean_and_destroy_all(game, game->df);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_description_file (desc_file) = {0};
@@ -62,8 +55,7 @@ int	main(int argc, char **argv)
 	if (!init_game(&game, &desc_file))
 		return (1);
 	print_controlor();
-	mlx_hook(game.mlx.windows, 2, 1L << 0, key_press, &game);
-	mlx_hook(game.mlx.windows, 17, 0, close_window, &game);
+	event_listener(&game);
 	mlx_loop_hook(game.mlx.ptr, game_loop, &game);
 	mlx_loop(game.mlx.ptr);
 	clean_and_destroy_all(&game, &desc_file);
