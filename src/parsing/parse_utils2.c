@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:28:45 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:30:36 by max              ###   ########.fr       */
+/*   Updated: 2024/11/10 22:20:48 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ char	*skype_space_ptr(char *str)
 	return (str);
 }
 
-bool	malloc_failed(t_description_file *desc_file)
+bool	malloc_failed(t_description_file *df)
 {
-	return (!(desc_file->elements.north_path && desc_file->elements.south_path
-			&& desc_file->elements.east_path && desc_file->elements.west_path));
+	return (!(df->elements.north_path && df->elements.south_path
+			&& df->elements.east_path && df->elements.west_path));
 }
 
-bool	validate_color_size(t_description_file *desc_file)
+bool	validate_color_size(t_description_file *df)
 {
-	return (is_valid_number(desc_file->elements.floor.red)
-		&& is_valid_number(desc_file->elements.floor.green)
-		&& is_valid_number(desc_file->elements.floor.blue)
-		&& is_valid_number(desc_file->elements.ceiling.red)
-		&& is_valid_number(desc_file->elements.ceiling.green)
-		&& is_valid_number(desc_file->elements.ceiling.blue));
+	return (is_valid_number(df->elements.floor.red)
+		&& is_valid_number(df->elements.floor.green)
+		&& is_valid_number(df->elements.floor.blue)
+		&& is_valid_number(df->elements.ceiling.red)
+		&& is_valid_number(df->elements.ceiling.green)
+		&& is_valid_number(df->elements.ceiling.blue));
 }

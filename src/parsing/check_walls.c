@@ -3,124 +3,120 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:24:06 by max               #+#    #+#             */
-/*   Updated: 2024/11/07 05:59:06 by max              ###   ########.fr       */
+/*   Updated: 2024/11/10 22:20:48 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static bool	check_up_of_map(t_description_file *desc_file)
+static bool	check_up_of_map(t_description_file *df)
 {
 	int		i;
 	bool	is_map_not_enclosed;
 
 	i = 0;
 	is_map_not_enclosed = false;
-	while (desc_file->map[0][i])
+	while (df->map[0][i])
 	{
-		if (desc_file->map[0][i] == '0'
-			|| is_valid_player_char(desc_file->map[0][i]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->map[0][i] == 32)
-			flood_fill(desc_file, 0, i, &is_map_not_enclosed);
+		if (df->map[0][i] == '0'
+			|| is_valid_player_char(df->map[0][i]))
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->map[0][i] == 32)
+			flood_fill(df, 0, i, &is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge\
-of the map\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->border_player == true)
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
 }
 
-static bool	check_down_of_map(t_description_file *desc_file)
+static bool	check_down_of_map(t_description_file *df)
 {
 	int		i;
 	bool	is_map_not_enclosed;
 
 	i = 0;
 	is_map_not_enclosed = false;
-	while (desc_file->map[desc_file->map_height - 1][i])
+	while (df->map[df->map_height - 1][i])
 	{
-		if (desc_file->map[desc_file->map_height - 1][i] == '0'
-			|| is_valid_player_char(desc_file->map[desc_file->map_height
+		if (df->map[df->map_height - 1][i] == '0'
+			|| is_valid_player_char(df->map[df->map_height
 				- 1][i]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->map[desc_file->map_height - 1][i] == 32)
-			flood_fill(desc_file, desc_file->map_height - 1, i,
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->map[df->map_height - 1][i] == 32)
+			flood_fill(df, df->map_height - 1, i,
 				&is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of\
-the map\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->border_player == true)
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
 }
 
-static bool	check_left_of_map(t_description_file *desc_file)
+static bool	check_left_of_map(t_description_file *df)
 {
 	int		i;
 	bool	is_map_not_enclosed;
 
 	i = 0;
 	is_map_not_enclosed = false;
-	while (i < desc_file->map_height)
+	while (i < df->map_height)
 	{
-		if (desc_file->map[i][0] == '0'
-			|| is_valid_player_char(desc_file->map[i][0]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->map[i][0] == 32)
-			flood_fill(desc_file, i, 0, &is_map_not_enclosed);
+		if (df->map[i][0] == '0'
+			|| is_valid_player_char(df->map[i][0]))
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->map[i][0] == 32)
+			flood_fill(df, i, 0, &is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of the \
-map\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->border_player == true)
+			return (print_err(INVALID_PLAYER_LOC), false);
 		i++;
 	}
 	return (true);
 }
 
-static bool	check_right_of_map(t_description_file *desc_file)
+static bool	check_right_of_map(t_description_file *df)
 {
 	int		i;
 	bool	is_map_not_enclosed;
 
 	i = 0;
 	is_map_not_enclosed = false;
-	while (i < desc_file->map_height)
+	while (i < df->map_height)
 	{
-		if (desc_file->map[i][desc_file->map_width - 1] == '0'
-			|| is_valid_player_char(desc_file->map[i][desc_file->map_width
+		if (df->map[i][df->map_width - 1] == '0'
+			|| is_valid_player_char(df->map[i][df->map_width
 				- 1]))
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->map[i][desc_file->map_width - 1] == 32)
-			flood_fill(desc_file, i, desc_file->map_width - 1,
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->map[i][df->map_width - 1] == 32)
+			flood_fill(df, i, df->map_width - 1,
 				&is_map_not_enclosed);
 		if (is_map_not_enclosed == true)
-			return (printf("Error\nThe map is not enclosed by walls\n"), false);
-		if (desc_file->border_player == true)
-			return (printf("Error\nPlayer is outside or on the edge of the \
-map\n"), false);
+			return (print_err(NOT_ENCLOSED), false);
+		if (df->border_player == true)
+			return (print_err(NOT_ENCLOSED), false);
 		i++;
 	}
 	return (true);
 }
 
-bool	check_walls_surrounding_map(t_description_file *desc_file)
+bool	check_walls_surrounding_map(t_description_file *df)
 {
-	if (!check_up_of_map(desc_file))
+	if (!check_up_of_map(df))
 		return (false);
-	if (!check_down_of_map(desc_file))
+	if (!check_down_of_map(df))
 		return (false);
-	if (!check_left_of_map(desc_file))
+	if (!check_left_of_map(df))
 		return (false);
-	if (!check_right_of_map(desc_file))
+	if (!check_right_of_map(df))
 		return (false);
 	return (true);
 }

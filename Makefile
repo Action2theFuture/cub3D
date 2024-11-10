@@ -6,7 +6,7 @@
 #    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/08 17:29:54 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/10 23:35:10 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ COLOR_BLUE = \033[1;34m
 COLOR_CYAN = \033[1;36m
 
 NAME 	= cub3D
+
 OS		= $(shell uname)
 
 LIB_DIR		= ./lib
@@ -41,10 +42,11 @@ SRC		 = main.c utils.c
 PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
 		get_map.c store_elements.c check_elements_and_map_name.c \
 		format_elements.c 
-INIT     = init_game.c init_player.c direction_setup.c
+INIT     = init_game.c init_player.c init_minimap.c direction_setup.c
 CLEANING = clean.c destroy.c clean_utils.c
-RENDERING = raycasting.c rendering.c calculate.c dda.c
-INPUT = input.c move.c rotate.c
+RENDERING = raycasting.c rendering.c calculate.c dda.c minimap.c minimap_draw_utils.c \
+			rendering_pixel.c
+INPUT = input.c move.c rotate.c mouse.c door.c
 DEBUG    = debug.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
@@ -83,7 +85,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	@cc $(CFLAGS) $(IFLAGS) -c $< -o $@ > /dev/null 2>&1
+	@cc $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT): 
 	@make -sC $(LIBFT_DIR)
@@ -101,8 +103,8 @@ $(OBJ_DIR):
 
 all : $(NAME)
 
-debug: CFLAGS += -g3 -fsanitize=address -DDEBUG=1
-debug: fclean $(NAME)
+debug : CFLAGS += -g3 -fsanitize=address -DDEBUG=1
+debug : fclean $(NAME)
 
 
 clean :
@@ -118,4 +120,7 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean debug re
+bonus : CFLAGS += -DBONUS=1
+bonus : fclean $(NAME)
+
+.PHONY : all clean fclean debug re bonus

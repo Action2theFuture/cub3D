@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 17:30:44 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:42:51 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ static bool	load_textures(t_game *game, t_description_file *df)
 		clean_and_destroy_all(game, df);
 		return (false);
 	}
+	if (BONUS)
+	{
+		df->elements.door_path = DOOR_PATH;
+		load_single_texture(\
+			game->mlx.ptr, &game->mlx.door_texture, df->elements.door_path);
+	}
 	return (true);
 }
 
@@ -63,11 +69,11 @@ static bool	init_mlx(t_game *game, t_description_file *df)
 {
 	game->mlx.ptr = mlx_init();
 	if (game->mlx.ptr == NULL)
-		return (printf("Error\n,MLX init failed\n"), clean_all(df), false);
+		return (print_err(MLX_INIT_FAIL), clean_all(df), false);
 	if (!init_window(game, df))
-		return (printf("Error\nMLX init windows failed\n"), false);
+		return (print_err(MLX_INIT_WINDOW_FAIL), false);
 	if (!load_textures(game, df))
-		return (printf("Error\nMLX init image failed\n"), false);
+		return (print_err(MLX_INIT_WINDOW_FAIL), false);
 	return (true);
 }
 
@@ -77,6 +83,7 @@ bool	init_game(t_game *game, t_description_file *df)
 		return (false);
 	game->df = df;
 	init_player(game);
+	init_minimap(game);
 	if (DEBUG_MODE)
 		debug_map_and_df(df);
 	render_frame(game);

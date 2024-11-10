@@ -6,31 +6,11 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 09:18:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/08 16:21:18 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:43:16 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-int	get_pixel_color(t_texture texture, int x, int y)
-{
-	char	*pixel;
-
-	pixel = texture.addr + \
-		(y * texture.line_length + x * (texture.bits_per_pixel / 8));
-	return (*(unsigned int *)pixel);
-}
-
-void	put_pixel(t_game *game, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || x >= game->screen_size_x || y < 0 || y >= game->screen_size_y)
-		return ;
-	dst = game->img.addr + \
-		(y * game->img.line_length + x * (game->img.bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
 
 static int	init_image(t_game	*game)
 {
@@ -47,12 +27,38 @@ static int	init_image(t_game	*game)
 	return (0);
 }
 
+static void	draw_ceiling_and_floor(t_game *game)
+{
+	int	ceiling_limit;
+	int	x;
+	int	y;
+
+	ceiling_limit = game->screen_size_y / 2;
+	y = -1;
+	while (++y < game->screen_size_y)
+	{
+		x = -1;
+		while (++x < game->screen_size_x)
+		{
+			if (y < ceiling_limit)
+				put_pixel(game, x, y, \
+				(game->df->elements.ceiling.red << 16) | \
+				(game->df->elements.ceiling.green << 8) | \
+				game->df->elements.ceiling.blue);
+			else
+				put_pixel(game, x, y, \
+				(game->df->elements.floor.red << 16) | \
+				(game->df->elements.floor.green << 8) | \
+				game->df->elements.floor.blue);
+		}
+	}
+}
+
 static void	update_window(t_game *game)
 {
 	if (init_image(game) == -1)
 		exit(1);
-	ft_memset(game->img.addr, 0, game->screen_size_x * game->screen_size_y * \
-		(game->img.bits_per_pixel / 8));
+	draw_ceiling_and_floor(game);
 	perform_raycasting(game);
 	mlx_put_image_to_window(game->mlx.ptr, \
 						game->mlx.windows, game->img.img, 0, 0);

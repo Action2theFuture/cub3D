@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_utils.c                                      :+:      :+:    :+:   */
+/*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 05:42:34 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 22:20:48 by junsan           ###   ########.fr       */
+/*   Created: 2024/11/09 12:30:14 by junsan            #+#    #+#             */
+/*   Updated: 2024/11/09 12:30:26 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	reach_end_of_file(t_description_file *df, char **elements)
+void	init_minimap(t_game *game)
 {
-	char	*str;
-
-	str = get_next_line(df->fd);
-	while (str)
-	{
-		free(str);
-		str = get_next_line(df->fd);
-	}
-	clean_elements_array(elements);
-	close(df->fd);
-	clean_all(df);
+	game->minimap_pos_x = 200;
+	game->minimap_pos_y = game->screen_size_y - \
+		(game->df->map_height * MINIMAP_SCALE) - 200;
 }

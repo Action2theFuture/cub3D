@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:34:16 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:42:37 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 //---------print a delete--------------------------------------------------
 void	debug_map_and_df(t_description_file *df);
+void	print_err(const char *msg);
 
 //--------------------- utils-- -------------------------------------------
 double	degrees_to_radians(double degrees);
@@ -28,6 +29,7 @@ void	set_direction_north(t_game *game, double plane_len);
 void	set_direction_south(t_game *game, double plane_len);
 void	set_direction_east(t_game *game, double plane_len);
 void	set_direction_west(t_game *game, double plane_len);
+void	init_minimap(t_game *game);
 bool	init_game(t_game *game, t_description_file *df);
 
 //--------------------- parsing -------------------------------------------
@@ -54,9 +56,6 @@ bool	validate_color_size(t_description_file *desc_file);
 bool	get_map(t_description_file *desc_file, char **argv);
 bool	is_valid_player_char(char c);
 
-//------------------------ input -------------------------------------------
-int		key_press(int keycode, t_game *game);
-
 //------------------------ move --------------------------------------------
 void	move_forward(t_game *game);
 void	move_backward(t_game *game);
@@ -66,6 +65,12 @@ void	move_right(t_game *game);
 //----------------------- rotate -------------------------------------------
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
+
+//------------------------ input -------------------------------------------
+int		mouse_move(int x, int y, t_game *game);
+int		key_press(int keycode, t_game *game);
+void	toggle_door(t_game *game);
+void	event_listener(t_game *game);
 
 //-------------------------- dda -------------------------------------------
 void	init_dda(t_game *game, \
@@ -83,9 +88,13 @@ void	calculate_wall_and_tex_x(\
 int		calculate_wall_dimensions(t_game *game, \
 						double perp_wall_dist, int *draw_start, int *draw_end);
 
+//----------------------- map ----------------------------------------------
+double	calculate_distance_to_wall(t_game *game);
+bool	is_wall(t_game *game, int x, int y);
+void	init_line(int player_pos[2], int line_pos[2], int params[4], int *err);
+void	draw_minimap(t_game *game);
+
 //-------------------- raycasting ------------------------------------------
-void	draw_wall_column(\
-		t_game *game, int x, int draw_pos[2], double perp_wall_dist);
 void	put_pixel(t_game *game, int x, int y, int color);
 void	perform_raycasting(t_game *game);
 
