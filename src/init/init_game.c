@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:54:08 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 21:03:38 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:42:51 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ static bool	load_textures(t_game *game, t_description_file *df)
 		clean_and_destroy_all(game, df);
 		return (false);
 	}
-	df->elements.door_path = "./textures/wolfenstein/eagle.xpm";
-	load_single_texture(\
-		game->mlx.ptr, &game->mlx.door_texture, df->elements.door_path);
+	if (BONUS)
+	{
+		df->elements.door_path = DOOR_PATH;
+		load_single_texture(\
+			game->mlx.ptr, &game->mlx.door_texture, df->elements.door_path);
+	}
 	return (true);
 }
 

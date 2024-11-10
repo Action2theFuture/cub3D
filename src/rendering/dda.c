@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:26:01 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/09 16:58:58 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:14:28 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static bool	check_boundary_collision(t_game *game, t_ray *ray)
 		return (true);
 	if (game->df->map == NULL || game->df->map[ray->map_y] == NULL)
 		return (true);
-	if (game->df->map[ray->map_y][ray->map_x] == '1')
+	if (game->df->map[ray->map_y][ray->map_x] == WALL)
 		return (true);
 	return (false);
 }
@@ -106,7 +106,8 @@ void	perform_dda(t_game *game, t_ray *ray)
 			break ;
 		}
 		cur_tile = game->df->map[ray->map_y][ray->map_x];
-		if (cur_tile == '1')
+		ray->tile_type = cur_tile;
+		if (cur_tile == WALL)
 			ray->hit = true;
 		else if (cur_tile == CLOSED_DOOR)
 			ray->hit = true;

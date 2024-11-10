@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:11:31 by junsan            #+#    #+#             */
-/*   Updated: 2024/11/09 15:18:25 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:54:13 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	key_press(int keycode, t_game *game)
 		move_left(game);
 	else if (keycode == KEY_D)
 		move_right(game);
-	else if (keycode == KEY_E)
+	else if (BONUS && keycode == KEY_E)
 		toggle_door(game);
 	else if (keycode == KEY_LEFT)
 		rotate_left(game);

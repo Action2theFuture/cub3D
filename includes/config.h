@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 17:42:59 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:01:02 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 
 # define WALL '1'
 # define ROAD '0'
-# define CLOSED_DOOR 'p'
-# define OPENED_DOOR 'P'
+# define CLOSED_DOOR 'P'
+# define OPENED_DOOR 'p'
 
 # define NORTH 0
 # define SOUTH 1
@@ -62,7 +62,7 @@
 
 # define MINIMAP_SCALE 10
 
-# define MAX_DOORS 100
+# define DOOR_PATH "./textures/wolfenstein/eagle.xpm"
 
 # define INVALID_ELE "Invalid ID elements or invalid numbers of \
 elements"

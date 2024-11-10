@@ -6,102 +6,102 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:06:18 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 17:36:40 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:20:48 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static bool	new_line_in_map(t_description_file *desc_file)
+static bool	new_line_in_map(t_description_file *df)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < desc_file->map_height)
+	while (i < df->map_height)
 	{
-		j = skype_space(desc_file->map[i]);
-		if (desc_file->map[i][j] == '\n')
+		j = skype_space(df->map[i]);
+		if (df->map[i][j] == '\n')
 			return (true);
 		i++;
 	}
 	return (false);
 }
 
-static void	get_map_size(t_description_file *desc_file)
+static void	get_map_size(t_description_file *df)
 {
 	char	*line;
 	int		i;
 	bool	end_of_elements;
 
 	end_of_elements = false;
-	line = get_next_line(desc_file->fd);
+	line = get_next_line(df->fd);
 	while (line)
 	{
 		i = skype_space(line);
 		if (line[i] == '\n' && end_of_elements == false)
-			desc_file->elements_lines++;
+			df->elements_lines++;
 		else
 			end_of_elements = true;
 		if (end_of_elements == true
-			&& ft_strlen_map(line) > desc_file->map_width)
-			desc_file->map_width = ft_strlen_map(line);
+			&& ft_strlen_map(line) > df->map_width)
+			df->map_width = ft_strlen_map(line);
 		if (end_of_elements == true)
-			desc_file->map_height++;
+			df->map_height++;
 		free(line);
-		line = get_next_line(desc_file->fd);
+		line = get_next_line(df->fd);
 	}
-	close(desc_file->fd);
+	close(df->fd);
 }
 
-static void	reach_map_start(t_description_file *desc_file)
+static void	reach_map_start(t_description_file *df)
 {
 	int		i;
 	char	*line;
 
 	i = 0;
-	while (i < desc_file->elements_lines)
+	while (i < df->elements_lines)
 	{
-		line = get_next_line(desc_file->fd);
+		line = get_next_line(df->fd);
 		free(line);
 		i++;
 	}
 }
 
-static bool	extract_map_lines(t_description_file *desc_file)
+static bool	extract_map_lines(t_description_file *df)
 {
 	int	i;
 
 	i = 0;
-	desc_file->map = malloc(desc_file->map_height * sizeof(char *));
-	if (desc_file->map == NULL)
+	df->map = malloc(df->map_height * sizeof(char *));
+	if (df->map == NULL)
 		return (print_err(MALLOC_FAIL), false);
-	while (i < desc_file->map_height)
+	while (i < df->map_height)
 	{
-		desc_file->map[i] = get_next_line(desc_file->fd);
-		if (desc_file->map[i] == NULL)
+		df->map[i] = get_next_line(df->fd);
+		if (df->map[i] == NULL)
 			return (print_err(MALLOC_FAIL),
-				clean_partial_array(desc_file->map, i), false);
+				clean_partial_array(df->map, i), false);
 		i++;
 	}
 	return (true);
 }
 
-bool	get_map(t_description_file *desc_file, char **argv)
+bool	get_map(t_description_file *df, char **argv)
 {
-	get_map_size(desc_file);
-	if (desc_file->map_height == 0)
+	get_map_size(df);
+	if (df->map_height == 0)
 		return (print_err(NO_MAP), false);
-	desc_file->fd = open(argv[1], O_RDONLY);
-	if (desc_file->fd == OPEN_FAILED)
+	df->fd = open(argv[1], O_RDONLY);
+	if (df->fd == OPEN_FAILED)
 		return (print_err(FILE_OPEN_FAIL), false);
-	reach_map_start(desc_file);
-	if (!extract_map_lines(desc_file))
+	reach_map_start(df);
+	if (!extract_map_lines(df))
 		return (false);
-	if (new_line_in_map(desc_file))
+	if (new_line_in_map(df))
 		return (print_err(NEW_LINE), false);
-	if (!parse_map(desc_file))
+	if (!parse_map(df))
 		return (false);
-	close(desc_file->fd);
+	close(df->fd);
 	return (true);
 }

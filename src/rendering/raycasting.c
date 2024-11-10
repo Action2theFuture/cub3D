@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 04:18:51 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 11:03:52 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:55:57 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	draw_pixels(t_game *game, int x, int draw_pos[2], int tex_x)
 {
 	int		y;
 	int		tex_y;
-	int		color;
 
+	int (color) = GREEN;
 	y = draw_pos[0];
 	while (y < draw_pos[1])
 	{
@@ -55,14 +55,14 @@ static void	draw_pixels(t_game *game, int x, int draw_pos[2], int tex_x)
 			color = get_pixel_color(game->mlx.east_texture, tex_x, tex_y);
 		else if (game->ray.side == WEST)
 			color = get_pixel_color(game->mlx.west_texture, tex_x, tex_y);
-		else
-			color = GREEN;
+		if (game->ray.tile_type == CLOSED_DOOR && BONUS)
+			color = get_pixel_color(game->mlx.door_texture, tex_x, tex_y);
 		put_pixel(game, x, y, color);
 		y++;
 	}
 }
 
-void	draw_wall_column(\
+static void	draw_wall_column(\
 			t_game *game, int x, int draw_pos[2], double perp_wall_dist)
 {
 	double	wall_x;

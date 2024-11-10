@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:50:43 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 21:00:06 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:42:04 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,53 +40,48 @@ void	clean_partial_array(char **elements, int nb)
 	free(elements);
 }
 
-void	clean_elements(t_description_file *desc_file)
+void	clean_elements(t_description_file *df)
 {
-	if (desc_file->elements.north_path)
+	if (df->elements.north_path)
 	{
-		free(desc_file->elements.north_path);
-		desc_file->elements.north_path = NULL;
+		free(df->elements.north_path);
+		df->elements.north_path = NULL;
 	}
-	if (desc_file->elements.south_path)
+	if (df->elements.south_path)
 	{
-		free(desc_file->elements.south_path);
-		desc_file->elements.south_path = NULL;
+		free(df->elements.south_path);
+		df->elements.south_path = NULL;
 	}
-	if (desc_file->elements.east_path)
+	if (df->elements.east_path)
 	{
-		free(desc_file->elements.east_path);
-		desc_file->elements.east_path = NULL;
+		free(df->elements.east_path);
+		df->elements.east_path = NULL;
 	}
-	if (desc_file->elements.west_path)
+	if (df->elements.west_path)
 	{
-		free(desc_file->elements.west_path);
-		desc_file->elements.west_path = NULL;
-	}
-	if (desc_file->elements.door_path)
-	{
-		free(desc_file->elements.door_path);
-		desc_file->elements.door_path = NULL;
+		free(df->elements.west_path);
+		df->elements.west_path = NULL;
 	}
 }
 
-void	clean_map(t_description_file *desc_file)
+void	clean_map(t_description_file *df)
 {
 	int	i;
 
 	i = 0;
-	while (i < desc_file->map_height)
+	while (i < df->map_height)
 	{
-		free(desc_file->map[i]);
-		desc_file->map[i] = NULL;
+		free(df->map[i]);
+		df->map[i] = NULL;
 		i++;
 	}
-	free(desc_file->map);
-	desc_file->map = NULL;
+	free(df->map);
+	df->map = NULL;
 }
 
-void	clean_all(t_description_file *desc_file)
+void	clean_all(t_description_file *df)
 {
-	if (desc_file->map)
-		clean_map(desc_file);
-	clean_elements(desc_file);
+	if (df->map)
+		clean_map(df);
+	clean_elements(df);
 }

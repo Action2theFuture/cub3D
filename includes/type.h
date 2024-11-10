@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 16:59:59 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:14:13 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	int		side;
+	char	tile_type;
 }	t_ray;
 
 typedef struct s_game

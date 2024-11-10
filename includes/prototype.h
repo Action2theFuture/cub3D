@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 17:11:53 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 23:42:37 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void	init_line(int player_pos[2], int line_pos[2], int params[4], int *err);
 void	draw_minimap(t_game *game);
 
 //-------------------- raycasting ------------------------------------------
-void	draw_wall_column(\
-		t_game *game, int x, int draw_pos[2], double perp_wall_dist);
 void	put_pixel(t_game *game, int x, int y, int color);
 void	perform_raycasting(t_game *game);
 

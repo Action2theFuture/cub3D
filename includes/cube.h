@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:30:44 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 17:36:10 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:18:18 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #  define DEBUG_MODE 1
 # else
 #  define DEBUG_MODE 0
+# endif
+
+# ifdef BONUS
+#  define BONUS 1
+# else
+#  define BONUS 0
 # endif
 
 # include <mlx.h>
