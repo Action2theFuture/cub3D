@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:20:25 by max               #+#    #+#             */
-/*   Updated: 2024/11/11 00:06:32 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/12 10:01:29 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,29 @@ static bool	check_and_store_elements(t_description_file *df,
 	return (true);
 }
 
-bool	is_valid_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
-}
-
 static bool	validate_map(t_description_file *df)
 {
 	int		j;
 
-	int (i) = 0;
-	while (i < df->map_height)
+	int (i) = -1;
+	while (++i < df->map_height)
 	{
-		j = 0;
-		while (j < df->map_width - 1)
+		j = -1;
+		while (++j < df->map_width)
 		{
 			if ((!is_valid_player_char(df->map[i][j]) && \
 			df->map[i][j] != ROAD && df->map[i][j] != WALL) && \
 			!(BONUS && df->map[i][j] == CLOSED_DOOR))
 				return (print_err(INVALID_CHARCTOR), false);
+			if (df->map[i][j] == CLOSED_DOOR && !is_surround_wall(df, j, i))
+				return (print_err(INVALID_DOOR_LOC), false);
 			if (is_valid_player_char(df->map[i][j]))
 			{
 				if (df->have_player == true)
 					return (print_err(TOO_MANY_PLAYER), false);
 				df->have_player = true;
 			}
-			j++;
 		}
-		i++;
 	}
 	if (df->have_player == false)
 		return (print_err(NO_PLAYER), false);

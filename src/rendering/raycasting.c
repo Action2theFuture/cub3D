@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 04:18:51 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 23:55:57 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 19:40:51 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,6 @@ static int	clamp_and_flip_tex_x(int tex_x, t_game *game)
 	if (game->ray.side == EAST || game->ray.side == SOUTH)
 		tex_x = tex_width - tex_x - 1;
 	return (tex_x);
-}
-
-static void	draw_pixels(t_game *game, int x, int draw_pos[2], int tex_x)
-{
-	int		y;
-	int		tex_y;
-
-	int (color) = GREEN;
-	y = draw_pos[0];
-	while (y < draw_pos[1])
-	{
-		if (game->ray.side == NORTH || game->ray.side == SOUTH)
-			tex_y = (int)game->ray.tex_pos % game->mlx.north_texture.height;
-		else
-			tex_y = (int)game->ray.tex_pos % game->mlx.east_texture.height;
-		game->ray.tex_pos += game->ray.step;
-		if (game->ray.side == NORTH)
-			color = get_pixel_color(game->mlx.north_texture, tex_x, tex_y);
-		else if (game->ray.side == SOUTH)
-			color = get_pixel_color(game->mlx.south_texture, tex_x, tex_y);
-		else if (game->ray.side == EAST)
-			color = get_pixel_color(game->mlx.east_texture, tex_x, tex_y);
-		else if (game->ray.side == WEST)
-			color = get_pixel_color(game->mlx.west_texture, tex_x, tex_y);
-		if (game->ray.tile_type == CLOSED_DOOR && BONUS)
-			color = get_pixel_color(game->mlx.door_texture, tex_x, tex_y);
-		put_pixel(game, x, y, color);
-		y++;
-	}
 }
 
 static void	draw_wall_column(\
