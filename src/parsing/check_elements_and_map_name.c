@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements_and_map_name.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:07:55 by max               #+#    #+#             */
-/*   Updated: 2024/11/09 17:26:08 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 11:43:07 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ bool	check_elements(char **elements)
 		j = skype_space(elements[i]);
 		if (!check_id_element(&elements[i][j]))
 			return (print_err(INVALID_ELE), false);
-		if ((i == 4 || i == 5) && \
+		if ((!ft_strncmp(&elements[i][j], "C", 1) || \
+			!ft_strncmp(&elements[i][j], "F", 1)) && \
 		!check_floor_and_ceiling_args(&elements[i][j + 1]))
 			return (print_err(INVALID_INPUT_CEILING_FLOOR), false);
 		i++;
