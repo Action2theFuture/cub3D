@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:07:59 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 23:14:13 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 21:40:23 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ typedef struct s_description_file
 
 }	t_description_file;
 
+typedef struct s_door
+{
+	double			animation_timer;
+	int				state;
+	int				x;
+	int				y;
+}	t_door;
+
 typedef struct s_texture
 {
 	void	*img;
@@ -80,13 +88,6 @@ typedef struct s_player
 	double	cam_vector_y;
 }	t_player;
 
-typedef struct s_door
-{
-	bool	is_door;
-	int		x;
-	int		y;
-}	t_door;
-
 typedef struct s_image
 {
 	void	*img;
@@ -108,6 +109,8 @@ typedef struct s_ray
 	double	perp_wall_dist;
 	double	step;
 	double	tex_pos;
+	double	anim_tex_pos;
+	double	anim_step;
 	bool	hit;
 	int		map_x;
 	int		map_y;
@@ -122,11 +125,13 @@ typedef struct s_game
 	t_description_file	*df;
 	t_mlx				mlx;
 	t_player			player;
+	t_door				doors[MAX_DOOR];
 	t_image				img;
 	t_ray				ray;
 	int					screen_size_x;
 	int					screen_size_y;
 	int					minimap_pos_x;
 	int					minimap_pos_y;
+	int					door_cnt;
 }	t_game;
 #endif

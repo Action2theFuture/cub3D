@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:13:49 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 22:20:48 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 19:05:06 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static void	print_controlor(void)
 
 static int	game_loop(t_game *game)
 {
+	static double	last_time = 0.0;
+	double			current_time;
+	double			delta_time;
+
+	current_time = get_current_time();
+	delta_time = current_time - last_time;
+	last_time = current_time;
+	if (BONUS)
+		update_doors(game, delta_time);
 	render_frame(game);
 	return (0);
 }

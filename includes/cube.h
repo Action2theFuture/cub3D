@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:30:44 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 22:18:18 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 13:05:18 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
+# include <sys/time.h>
 
 # include "libft.h"
 # include "get_next_line.h"
