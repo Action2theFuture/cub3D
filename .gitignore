@@ -55,5 +55,3 @@ dkms.conf
 *.swap
 .vscode
 cub3D
-
-*.c.un~
