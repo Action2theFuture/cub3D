@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:09:24 by max               #+#    #+#             */
-/*   Updated: 2024/11/11 00:46:39 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 23:00:35 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,18 @@
 # define D  7
 # define OPEN_FAILED -1
 
+// CLOSED_DOOR, OPENED_DOOR are charactor in map
+// DOOR_CLOSED, DOOR_OPENING, DOOR_OPEN for animation
 # define WALL '1'
 # define ROAD '0'
 # define CLOSED_DOOR 'P'
 # define OPENED_DOOR 'p'
+# define MAX_DOOR 100
+
+# define DOOR_CLOSED 0
+# define DOOR_CLOSING 1
+# define DOOR_OPEN 2
+# define DOOR_OPENING 3
 
 # define NORTH 0
 # define SOUTH 1
@@ -61,9 +69,10 @@
 # define ROT_SPEED_CONTROL 0.01
 
 # define MINIMAP_SCALE 10
-
+# define ANIMATION_DURATION 0.5
 # define DOOR_PATH "./textures/wolfenstein/eagle.xpm"
 
+# define ERR_MAXIMUM_DOOR "Maximum number of doors reached"
 # define INVALID_ELE "Invalid ID elements or invalid numbers of \
 elements"
 # define MALLOC_FAIL "Malloc failled"
@@ -84,6 +93,10 @@ elements"
 # define MLX_INIT_FAIL "MLX init failed"
 # define MLX_INIT_WINDOW_FAIL "MLX init windows failed"
 # define MLX_INIT_IMAGE_FAIL "MLX init image failed"
+# define ERR_TEXTURE_SIZE "Texture size mismatch"
+# define ERR_LOAD_TEXTURE "Failed to load texture"
+# define INVALID_PLAYER_DIR "Invalid player direction"
+# define INVALID_DOOR_LOC "The wall is not enclose with wall"
 
 # ifdef __APPLE__
 #  define KEY_W     13

@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 17:53:01 by max               #+#    #+#             */
-/*   Updated: 2024/11/10 23:42:37 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/12 09:55:14 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void	print_err(const char *msg);
 
 //--------------------- utils-- -------------------------------------------
 double	degrees_to_radians(double degrees);
+double	get_current_time(void);
 
 //-------------------- init MLX/data ---------------------------------------
+bool	init_texture(t_game *game, t_description_file *df);
 void	init_player(t_game *game);
+void	init_doors(t_game *game);
+void	init_minimap(t_game *game);
 void	set_direction_north(t_game *game, double plane_len);
 void	set_direction_south(t_game *game, double plane_len);
 void	set_direction_east(t_game *game, double plane_len);
 void	set_direction_west(t_game *game, double plane_len);
-void	init_minimap(t_game *game);
 bool	init_game(t_game *game, t_description_file *df);
 
 //--------------------- parsing -------------------------------------------
@@ -43,6 +46,8 @@ bool	check_floor_and_ceiling_args(char *str);
 bool	format_elements(t_description_file *df);
 void	flood_fill(t_description_file *desc_file, \
 		int y, int x, bool *is_map_not_enclosed);
+bool	is_valid_player_char(char c);
+bool	is_surround_wall(t_description_file *df, int x, int y);
 
 //-------------------- parse utils ----------------------------------------
 int		skype_space(char *str);
@@ -69,6 +74,7 @@ void	rotate_right(t_game *game);
 //------------------------ input -------------------------------------------
 int		mouse_move(int x, int y, t_game *game);
 int		key_press(int keycode, t_game *game);
+void	update_doors(t_game *game, double delta_time);
 void	toggle_door(t_game *game);
 void	event_listener(t_game *game);
 
@@ -99,8 +105,9 @@ void	put_pixel(t_game *game, int x, int y, int color);
 void	perform_raycasting(t_game *game);
 
 //-------------------- rendering -------------------------------------------
-void	put_pixel(t_game *game, int x, int y, int color);
 int		get_pixel_color(t_texture texture, int x, int y);
+void	put_pixel(t_game *game, int x, int y, int color);
+void	draw_pixels(t_game *game, int x, int draw_pos[2], int tex_x);
 void	render_frame(t_game *game);
 
 //------------------------ clean -------------------------------------------

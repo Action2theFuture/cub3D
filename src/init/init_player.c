@@ -6,7 +6,7 @@
 /*   By: junsan <junsan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:30:10 by max               #+#    #+#             */
-/*   Updated: 2024/11/08 16:40:35 by junsan           ###   ########.fr       */
+/*   Updated: 2024/11/11 23:01:13 by junsan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	init_player_view_angle(t_game *game, char direction)
 		set_direction_west(game, plane_len);
 	else
 	{
-		fprintf(stderr, "Error: Invalid player direction '%c'\n", direction);
+		print_err(INVALID_PLAYER_DIR);
+		printf(PRINT_RED"'%c'\n", direction);
 		clean_and_destroy_all(game, game->df);
 		exit(EXIT_FAILURE);
 	}
@@ -43,7 +44,7 @@ bool	set_player_position(t_game *game, int x, int y, char direction)
 {
 	if (game->player.pos_x != -1 && game->player.pos_y != -1)
 	{
-		fprintf(stderr, "Error: Multiple player start positions found.\n");
+		print_err(TOO_MANY_PLAYER);
 		clean_and_destroy_all(game, game->df);
 		exit(EXIT_FAILURE);
 	}
@@ -60,7 +61,7 @@ bool	set_player_position(t_game *game, int x, int y, char direction)
 
 static void	no_player_error(t_game *game)
 {
-	fprintf(stderr, "Error: No player start position found in the map.\n");
+	print_err(NO_PLAYER);
 	clean_and_destroy_all(game, game->df);
 	exit(EXIT_FAILURE);
 }

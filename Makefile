@@ -6,7 +6,7 @@
 #    By: junsan <junsan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 09:12:59 by junsan            #+#    #+#              #
-#    Updated: 2024/11/10 23:35:10 by junsan           ###   ########.fr        #
+#    Updated: 2024/11/11 23:44:07 by junsan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,14 @@ INPUT_DIR = $(SRC_DIR)/input
 DEBUG_DIR   = $(SRC_DIR)/debug
 
 SRC		 = main.c utils.c
-PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse.c \
+PARSING  = check_walls.c parse_map.c parse_utils.c parse_utils2.c parse_utils3.c parse.c \
 		get_map.c store_elements.c check_elements_and_map_name.c \
 		format_elements.c 
-INIT     = init_game.c init_player.c init_minimap.c direction_setup.c
+INIT     = init_game.c init_player.c init_minimap.c init_doors.c direction_setup.c \
+		init_texture.c
 CLEANING = clean.c destroy.c clean_utils.c
 RENDERING = raycasting.c rendering.c calculate.c dda.c minimap.c minimap_draw_utils.c \
-			rendering_pixel.c
+			rendering_pixel.c draw_pixels.c
 INPUT = input.c move.c rotate.c mouse.c door.c
 DEBUG    = debug.c
 
@@ -123,4 +124,7 @@ re : fclean all
 bonus : CFLAGS += -DBONUS=1
 bonus : fclean $(NAME)
 
-.PHONY : all clean fclean debug re bonus
+debug_bonus : CFLAGS += -fsanitize=address -DDEBUG=1 -DBONUS=1
+debug_bonus : fclean $(NAME)
+
+.PHONY : all clean fclean debug re bonus debug_bonus
